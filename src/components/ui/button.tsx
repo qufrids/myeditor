@@ -10,7 +10,7 @@ const buttonVariants = cva(
         default:
           "bg-slate-900 text-white rounded-xl hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100 shadow-sm",
         luxury:
-          "bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-[0_4px_20px_rgba(37,99,235,0.25)] hover:shadow-[0_8px_30px_rgba(37,99,235,0.35)] hover:-translate-y-[1px]",
+          "relative overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 text-white font-bold rounded-full shadow-[0_4px_24px_rgba(37,99,235,0.40),inset_0_1px_0_rgba(255,255,255,0.15)] hover:shadow-[0_8px_40px_rgba(37,99,235,0.55),inset_0_1px_0_rgba(255,255,255,0.15)] hover:-translate-y-[2px] hover:brightness-110 before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.18),transparent_60%)] before:pointer-events-none",
         outline:
           "border border-slate-200 bg-transparent text-slate-700 rounded-full hover:bg-slate-50 hover:border-slate-300 dark:border-white/15 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:border-white/25",
         ghost:

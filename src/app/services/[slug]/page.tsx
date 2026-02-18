@@ -6,15 +6,29 @@ import { Button } from "@/components/ui/button";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const service = await prisma.service.findUnique({ where: { slug } });
-  if (!service) return {};
-  return { title: service.metaTitle || service.title, description: service.metaDesc || service.shortDesc };
+  try {
+    const service = await prisma.service.findUnique({ where: { slug } });
+    if (!service) return {};
+    return { title: service.metaTitle || service.title, description: service.metaDesc || service.shortDesc };
+  } catch {
+    return {};
+  }
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const service = await prisma.service.findUnique({ where: { slug }, include: { faqs: { where: { isActive: true }, orderBy: { sortOrder: "asc" } } } });
-  if (!service) notFound();
+
+  let service;
+  try {
+    service = await prisma.service.findUnique({
+      where: { slug },
+      include: { faqs: { where: { isActive: true }, orderBy: { sortOrder: "asc" } } },
+    });
+  } catch {
+    return notFound();
+  }
+
+  if (!service) return notFound();
 
   const features = (service.features as string[] | null) || [];
   const benefits = (service.benefits as string[] | null) || [];
@@ -22,7 +36,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#020617] pt-28 pb-16 sm:pt-36 sm:pb-20">
+      <section className="relative overflow-hidden bg-slate-900 dark:bg-[#020617] pt-28 pb-16 sm:pt-36 sm:pb-20">
         <div className="pointer-events-none absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_30%_30%,rgba(59,130,246,0.15),transparent_60%)]" />
         <div className="pointer-events-none absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_70%_70%,rgba(139,92,246,0.1),transparent_50%)]" />
         <div className="relative z-10 mx-auto max-w-3xl px-5 text-center sm:px-6 lg:px-8">

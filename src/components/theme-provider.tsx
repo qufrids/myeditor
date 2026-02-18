@@ -10,8 +10,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // storageKey → persist choice in localStorage
     <NextThemesProvider
       attribute="class"
-      defaultTheme="dark"
-      enableSystem
+      defaultTheme="light"
+      enableSystem={false}
       storageKey="editorsforuk-theme"
     >
       {children}
