@@ -3,6 +3,9 @@ import Credentials from "next-auth/providers/credentials";
 import { verifyAdmin } from "./auth";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  // Required for deployments behind reverse proxies (Vercel, Netlify, etc.)
+  trustHost: true,
+  secret: process.env.AUTH_SECRET ?? process.env.NEXTAUTH_SECRET,
   providers: [
     Credentials({
       name: "credentials",
