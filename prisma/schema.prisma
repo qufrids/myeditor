@@ -1,0 +1,133 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String
+  role          String    @default("admin")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Service {
+  id            String    @id @default(cuid())
+  title         String
+  slug          String    @unique
+  description   String
+  shortDesc     String?
+  icon          String?
+  heroTitle     String?
+  heroSubtitle  String?
+  features      Json?
+  benefits      Json?
+  process       Json?
+  metaTitle     String?
+  metaDesc      String?
+  isActive      Boolean   @default(true)
+  sortOrder     Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  faqs          FAQ[]
+}
+
+model Testimonial {
+  id            String    @id @default(cuid())
+  name          String
+  university    String?
+  course        String?
+  rating        Int       @default(5)
+  content       String
+  avatar        String?
+  isVerified    Boolean   @default(true)
+  isFeatured    Boolean   @default(false)
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Inquiry {
+  id            String    @id @default(cuid())
+  name          String
+  email         String
+  phone         String?
+  service       String
+  academicLevel String?
+  deadline      String?
+  wordCount     Int?
+  instructions  String?
+  status        String    @default("new")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model BlogPost {
+  id            String    @id @default(cuid())
+  title         String
+  slug          String    @unique
+  excerpt       String?
+  content       String
+  coverImage    String?
+  category      String?
+  tags          Json?
+  isPublished   Boolean   @default(false)
+  metaTitle     String?
+  metaDesc      String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model FAQ {
+  id            String    @id @default(cuid())
+  question      String
+  answer        String
+  category      String?
+  serviceId     String?
+  service       Service?  @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  sortOrder     Int       @default(0)
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model StatsCounter {
+  id            String    @id @default(cuid())
+  label         String
+  value         Int
+  suffix        String?
+  icon          String?
+  sortOrder     Int       @default(0)
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model SiteSettings {
+  id            String    @id @default(cuid())
+  key           String    @unique
+  value         String
+  type          String    @default("text")
+  group         String    @default("general")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model PolicyPage {
+  id            String    @id @default(cuid())
+  title         String
+  slug          String    @unique
+  content       String
+  metaTitle     String?
+  metaDesc      String?
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
