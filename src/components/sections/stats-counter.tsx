@@ -3,36 +3,35 @@
 import { useInView } from "react-intersection-observer";
 import CountUp from "react-countup";
 import { motion } from "framer-motion";
-import { Users, FileCheck, Star, Clock } from "lucide-react";
 
 const stats = [
-  { icon: Users, value: 15000, suffix: "+", label: "Students Helped" },
-  { icon: FileCheck, value: 50000, suffix: "+", label: "Papers Delivered" },
-  { icon: Star, value: 4.9, suffix: "/5", label: "Average Rating", decimals: 1 },
-  { icon: Clock, value: 99, suffix: "%", label: "On-Time Delivery" },
+  { value: 15000, suffix: "+", label: "Students Helped" },
+  { value: 50000, suffix: "+", label: "Papers Delivered" },
+  { value: 4.9, suffix: "/5", label: "Average Rating", decimals: 1 },
+  { value: 99, suffix: "%", label: "On-Time Delivery" },
 ];
 
 export function StatsCounter() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
 
   return (
-    <section ref={ref} className="relative py-20 bg-white dark:bg-slate-950">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
+    <section ref={ref} className="section-padding bg-white dark:bg-slate-950">
+      <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4 lg:gap-12">
           {stats.map((stat, i) => (
             <motion.div key={stat.label}
-              initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.15, duration: 0.5 }}
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.1, duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
               className="text-center">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-500/10 dark:to-indigo-500/10">
-                <stat.icon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-              </div>
-              <div className="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">
+              <div className="text-[clamp(2rem,5vw,3.25rem)] font-bold tracking-[-0.04em] text-slate-900 dark:text-white">
                 {inView && (
-                  <CountUp end={stat.value} duration={2.5} decimals={stat.decimals || 0} suffix={stat.suffix} />
+                  <CountUp end={stat.value} duration={2} decimals={stat.decimals || 0} suffix={stat.suffix} />
                 )}
               </div>
-              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{stat.label}</p>
+              <p className="mt-1 text-[13px] font-medium tracking-wide text-slate-500 dark:text-slate-500 sm:text-sm">
+                {stat.label}
+              </p>
             </motion.div>
           ))}
         </div>

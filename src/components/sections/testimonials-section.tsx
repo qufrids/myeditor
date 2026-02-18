@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   { name: "Sarah M.", university: "University of Oxford", course: "English Literature", rating: 5, content: "Absolutely outstanding work. The essay was brilliantly structured with exceptional arguments. I received a first-class mark and my tutor specifically praised the depth of analysis." },
@@ -16,57 +16,61 @@ export function TestimonialsSection() {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => setCurrent((prev) => (prev + 1) % testimonials.length), 5000);
+    const timer = setInterval(() => setCurrent((prev) => (prev + 1) % testimonials.length), 6000);
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <section className="relative py-24 bg-white dark:bg-slate-950">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">What Students Say</h2>
-          <p className="mt-4 text-lg text-slate-500 dark:text-slate-400">Join thousands of satisfied students</p>
+    <section className="section-padding bg-white dark:bg-slate-950">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.5 }}
+          className="text-center mb-12 sm:mb-16">
+          <h2 className="text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-[-0.03em] text-slate-900 dark:text-white">What Students Say</h2>
+          <p className="mt-3 text-base text-slate-500 dark:text-slate-400 sm:text-[17px]">Join thousands of satisfied students</p>
         </motion.div>
 
-        <div className="relative mx-auto max-w-3xl">
+        <div className="relative mx-auto max-w-2xl">
           <AnimatePresence mode="wait">
             <motion.div key={current}
-              initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.4 }}
-              className="rounded-2xl border border-slate-100 bg-slate-50/50 p-8 text-center dark:border-white/5 dark:bg-slate-900/50 md:p-12">
-              <Quote className="mx-auto h-8 w-8 text-blue-200 dark:text-blue-800" />
-              <div className="mt-4 flex items-center justify-center gap-1">
+              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.35, ease: [0.25, 0.4, 0.25, 1] }}
+              className="rounded-2xl border border-slate-100 bg-slate-50/40 p-7 text-center dark:border-white/[0.04] dark:bg-white/[0.015] sm:p-10">
+              {/* Stars */}
+              <div className="flex items-center justify-center gap-0.5">
                 {Array.from({ length: testimonials[current].rating }).map((_, i) => (
-                  <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
+                  <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
                 ))}
               </div>
-              <p className="mt-6 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+              {/* Quote */}
+              <p className="mt-6 text-[clamp(1rem,2.5vw,1.175rem)] leading-[1.7] text-slate-700 dark:text-slate-300">
                 &ldquo;{testimonials[current].content}&rdquo;
               </p>
+              {/* Attribution */}
               <div className="mt-6">
-                <p className="font-semibold text-slate-900 dark:text-white">{testimonials[current].name}</p>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
-                  {testimonials[current].course} - {testimonials[current].university}
+                <p className="text-[15px] font-semibold text-slate-900 dark:text-white">{testimonials[current].name}</p>
+                <p className="mt-0.5 text-[13px] text-slate-500 dark:text-slate-500">
+                  {testimonials[current].course} &middot; {testimonials[current].university}
                 </p>
               </div>
             </motion.div>
           </AnimatePresence>
 
-          <div className="mt-8 flex items-center justify-center gap-4">
+          {/* Controls */}
+          <div className="mt-6 flex items-center justify-center gap-3 sm:mt-8">
             <button onClick={() => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 transition-colors hover:bg-slate-100 dark:border-white/10 dark:hover:bg-white/5">
-              <ChevronLeft className="h-5 w-5 text-slate-500" />
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-400 transition-all hover:border-slate-300 hover:text-slate-600 dark:border-white/[0.08] dark:text-slate-500 dark:hover:border-white/[0.15] dark:hover:text-slate-300">
+              <ChevronLeft className="h-4 w-4" />
             </button>
-            <div className="flex gap-2">
+            <div className="flex gap-1.5">
               {testimonials.map((_, i) => (
                 <button key={i} onClick={() => setCurrent(i)}
-                  className={`h-2 rounded-full transition-all ${i === current ? "w-6 bg-blue-600" : "w-2 bg-slate-300 dark:bg-slate-700"}`} />
+                  className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? "w-6 bg-blue-600" : "w-1.5 bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600"}`} />
               ))}
             </div>
             <button onClick={() => setCurrent((prev) => (prev + 1) % testimonials.length)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 transition-colors hover:bg-slate-100 dark:border-white/10 dark:hover:bg-white/5">
-              <ChevronRight className="h-5 w-5 text-slate-500" />
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-400 transition-all hover:border-slate-300 hover:text-slate-600 dark:border-white/[0.08] dark:text-slate-500 dark:hover:border-white/[0.15] dark:hover:text-slate-300">
+              <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         </div>

@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -16,18 +17,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   if (!post || !post.isPublished) notFound();
 
   return (
-    <div className="pt-24 pb-16">
-      <article className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <Link href="/blog" className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400">&larr; Back to Blog</Link>
+    <div className="pt-28 sm:pt-32">
+      <article className="mx-auto max-w-3xl px-5 sm:px-6 lg:px-8">
+        <Link href="/blog" className="inline-flex items-center gap-1.5 text-[13px] font-medium text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+          <ArrowLeft className="h-3.5 w-3.5" /> Back to Blog
+        </Link>
 
         <div className="mt-8">
           {post.category && (
-            <span className="inline-flex rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-500/10 dark:text-blue-400">
+            <span className="inline-flex rounded-full bg-blue-50 px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-[0.06em] text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
               {post.category}
             </span>
           )}
-          <h1 className="mt-2 text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">{post.title}</h1>
-          <p className="mt-2 text-sm text-slate-500">{formatDate(post.createdAt)}</p>
+          <h1 className="mt-3 text-[clamp(1.75rem,4vw,2.75rem)] font-bold tracking-[-0.03em] leading-[1.15] text-slate-900 dark:text-white">{post.title}</h1>
+          <p className="mt-3 text-[13px] text-slate-400">{formatDate(post.createdAt)}</p>
         </div>
 
         {post.coverImage && (
@@ -36,12 +39,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         )}
 
-        <div className="prose prose-slate dark:prose-invert mt-8 max-w-none">
+        <div className="prose prose-slate dark:prose-invert mt-10 max-w-none prose-p:text-[15px] prose-p:leading-[1.8] prose-headings:tracking-[-0.02em]">
           {post.content.split("\n").map((paragraph, i) => (
             paragraph.trim() ? <p key={i}>{paragraph}</p> : null
           ))}
         </div>
       </article>
+
+      <div className="h-20 sm:h-24" />
     </div>
   );
 }

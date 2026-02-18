@@ -6,11 +6,7 @@ export const metadata = {
   title: "Admin Dashboard | EditorsForUK",
 };
 
-export default async function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
 
   if (!session?.user) {
@@ -18,7 +14,7 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="flex h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="flex h-screen overflow-hidden bg-slate-50/50 dark:bg-[#070c18]">
       <AdminSidebar user={session.user} />
       <main className="flex-1 overflow-auto">
         <div className="p-6 lg:p-8">{children}</div>

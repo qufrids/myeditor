@@ -20,12 +20,18 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const benefits = (service.benefits as string[] | null) || [];
 
   return (
-    <div className="pt-24 pb-16">
+    <div>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950/80 to-slate-950 py-24">
-        <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-white sm:text-5xl">{service.heroTitle || service.title}</h1>
-          <p className="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">{service.heroSubtitle || service.shortDesc || service.description}</p>
+      <section className="relative overflow-hidden bg-[#020617] pt-28 pb-16 sm:pt-36 sm:pb-20">
+        <div className="pointer-events-none absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_30%_30%,rgba(59,130,246,0.15),transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_70%_70%,rgba(139,92,246,0.1),transparent_50%)]" />
+        <div className="relative z-10 mx-auto max-w-3xl px-5 text-center sm:px-6 lg:px-8">
+          <h1 className="text-[clamp(2rem,5vw,3.25rem)] font-bold tracking-[-0.03em] text-white leading-[1.1]">
+            {service.heroTitle || service.title}
+          </h1>
+          <p className="mt-4 text-[clamp(0.95rem,2vw,1.1rem)] leading-relaxed text-slate-400 max-w-xl mx-auto">
+            {service.heroSubtitle || service.shortDesc || service.description}
+          </p>
           <div className="mt-8">
             <Button variant="luxury" size="xl" asChild>
               <Link href="/order" className="gap-2">Order Now <ArrowRight className="h-4 w-4" /></Link>
@@ -35,27 +41,27 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       </section>
 
       {/* Description */}
-      <section className="py-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-slate dark:prose-invert max-w-none">
-            <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-300">{service.description}</p>
-          </div>
+      <section className="section-padding">
+        <div className="mx-auto max-w-3xl px-5 sm:px-6 lg:px-8">
+          <p className="text-[clamp(1rem,2vw,1.1rem)] leading-[1.8] text-slate-600 dark:text-slate-300">{service.description}</p>
         </div>
       </section>
 
       {/* Features & Benefits */}
       {(features.length > 0 || benefits.length > 0) && (
-        <section className="py-16 bg-slate-50/50 dark:bg-slate-900/50">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+        <section className="section-padding bg-slate-50/60 dark:bg-slate-900/30">
+          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
               {features.length > 0 && (
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Features</h2>
+                  <h2 className="text-[clamp(1.25rem,3vw,1.75rem)] font-bold tracking-[-0.02em] text-slate-900 dark:text-white">Features</h2>
                   <ul className="mt-6 space-y-3">
                     {features.map((f, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        <Check className="h-5 w-5 mt-0.5 text-blue-600 dark:text-blue-400 shrink-0" />
-                        <span className="text-slate-600 dark:text-slate-300">{f}</span>
+                        <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-500/10">
+                          <Check className="h-3 w-3 text-blue-600 dark:text-blue-400" />
+                        </div>
+                        <span className="text-[14px] leading-[1.7] text-slate-600 dark:text-slate-300">{f}</span>
                       </li>
                     ))}
                   </ul>
@@ -63,12 +69,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               )}
               {benefits.length > 0 && (
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Benefits</h2>
+                  <h2 className="text-[clamp(1.25rem,3vw,1.75rem)] font-bold tracking-[-0.02em] text-slate-900 dark:text-white">Benefits</h2>
                   <ul className="mt-6 space-y-3">
                     {benefits.map((b, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        <Check className="h-5 w-5 mt-0.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                        <span className="text-slate-600 dark:text-slate-300">{b}</span>
+                        <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-500/10">
+                          <Check className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
+                        </div>
+                        <span className="text-[14px] leading-[1.7] text-slate-600 dark:text-slate-300">{b}</span>
                       </li>
                     ))}
                   </ul>
@@ -81,14 +89,19 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       {/* FAQs */}
       {service.faqs.length > 0 && (
-        <section className="py-16">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white text-center mb-8">Frequently Asked Questions</h2>
-            <div className="space-y-4">
+        <section className="section-padding">
+          <div className="mx-auto max-w-3xl px-5 sm:px-6 lg:px-8">
+            <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-[-0.02em] text-slate-900 dark:text-white text-center mb-8 sm:mb-10">
+              Frequently Asked Questions
+            </h2>
+            <div className="space-y-3">
               {service.faqs.map((faq) => (
-                <details key={faq.id} className="group rounded-xl border border-slate-200 bg-white p-5 dark:border-white/10 dark:bg-slate-800/50">
-                  <summary className="cursor-pointer font-medium text-slate-900 dark:text-white">{faq.question}</summary>
-                  <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">{faq.answer}</p>
+                <details key={faq.id} className="group rounded-xl border border-slate-200/60 bg-white p-5 transition-colors open:bg-slate-50/50 dark:border-white/[0.04] dark:bg-white/[0.02] dark:open:bg-white/[0.03]">
+                  <summary className="cursor-pointer text-[15px] font-medium text-slate-900 dark:text-white [&::-webkit-details-marker]:hidden list-none flex items-center justify-between">
+                    {faq.question}
+                    <span className="ml-4 shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-3 text-[14px] leading-[1.7] text-slate-500 dark:text-slate-400">{faq.answer}</p>
                 </details>
               ))}
             </div>
@@ -97,12 +110,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       )}
 
       {/* CTA */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-indigo-600">
-        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-white">Ready to Get Started?</h2>
-          <p className="mt-4 text-blue-100">Place your order today and let our experts handle the rest.</p>
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-600 to-indigo-700" />
+        <div className="pointer-events-none absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_50%)]" />
+        <div className="relative z-10 mx-auto max-w-3xl px-5 py-16 text-center sm:px-6 sm:py-20 lg:py-24">
+          <h2 className="text-[clamp(1.5rem,4vw,2.25rem)] font-bold tracking-[-0.02em] text-white">Ready to Get Started?</h2>
+          <p className="mt-3 text-[clamp(0.9rem,2vw,1.05rem)] text-blue-100/80">Place your order today and let our experts handle the rest.</p>
           <div className="mt-8">
-            <Button size="xl" className="bg-white text-blue-600 hover:bg-blue-50 shadow-xl" asChild>
+            <Button size="xl" className="bg-white text-blue-600 hover:bg-blue-50 shadow-[0_4px_20px_rgba(0,0,0,0.15)] rounded-full" asChild>
               <Link href="/order">Place Your Order</Link>
             </Button>
           </div>

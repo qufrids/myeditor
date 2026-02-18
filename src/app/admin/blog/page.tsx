@@ -9,45 +9,43 @@ export default async function AdminBlogPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="mb-8 flex items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Blog Posts</h1>
-          <p className="mt-1 text-sm text-slate-500">{posts.length} posts</p>
+          <h1 className="text-[22px] font-bold tracking-[-0.02em] text-slate-900 dark:text-white">Blog Posts</h1>
+          <p className="mt-0.5 text-[13px] text-slate-500">{posts.length} posts</p>
         </div>
-        <Button variant="luxury" asChild>
-          <Link href="/admin/blog/new"><Plus className="mr-2 h-4 w-4" /> New Post</Link>
+        <Button variant="luxury" size="sm" asChild>
+          <Link href="/admin/blog/new"><Plus className="mr-1.5 h-3.5 w-3.5" /> New Post</Link>
         </Button>
       </div>
 
-      <div className="mt-6 overflow-hidden rounded-xl border border-slate-200 dark:border-white/10">
-        <table className="w-full">
-          <thead className="bg-slate-50 dark:bg-slate-800/50">
-            <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-500">Title</th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-500">Category</th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-500">Status</th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-500">Date</th>
-              <th className="px-4 py-3 text-right text-xs font-medium uppercase text-slate-500">Actions</th>
+      <div className="overflow-x-auto rounded-2xl border border-slate-200/60 bg-white dark:border-white/[0.04] dark:bg-white/[0.02]">
+        <table className="w-full min-w-[600px]">
+          <thead>
+            <tr className="border-b border-slate-100 dark:border-white/[0.04]">
+              {["Title", "Category", "Status", "Date", ""].map((h, i) => (
+                <th key={i} className={`px-5 py-3.5 text-[11px] font-medium uppercase tracking-[0.07em] text-slate-400 ${i === 4 ? "text-right" : "text-left"}`}>{h}</th>
+              ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 dark:divide-white/5">
+          <tbody className="divide-y divide-slate-100 dark:divide-white/[0.03]">
             {posts.map((post) => (
-              <tr key={post.id} className="bg-white dark:bg-slate-900">
-                <td className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-white">{post.title}</td>
-                <td className="px-4 py-3 text-sm text-slate-500">{post.category || "-"}</td>
-                <td className="px-4 py-3">
-                  <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${post.isPublished ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400" : "bg-amber-100 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400"}`}>
+              <tr key={post.id} className="transition-colors hover:bg-slate-50/50 dark:hover:bg-white/[0.01]">
+                <td className="px-5 py-3.5 text-[13px] font-medium text-slate-900 dark:text-white max-w-[280px] truncate">{post.title}</td>
+                <td className="px-5 py-3.5 text-[13px] text-slate-500">{post.category || "—"}</td>
+                <td className="px-5 py-3.5">
+                  <span className={`inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-medium ${post.isPublished ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400" : "bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400"}`}>
                     {post.isPublished ? "Published" : "Draft"}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-sm text-slate-500">{formatDate(post.createdAt)}</td>
-                <td className="px-4 py-3 text-right">
-                  <Link href={`/admin/blog/${post.id}`} className="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400">Edit</Link>
+                <td className="px-5 py-3.5 text-[13px] text-slate-400">{formatDate(post.createdAt)}</td>
+                <td className="px-5 py-3.5 text-right">
+                  <Link href={`/admin/blog/${post.id}`} className="text-[13px] font-medium text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">Edit</Link>
                 </td>
               </tr>
             ))}
             {posts.length === 0 && (
-              <tr><td colSpan={5} className="px-4 py-8 text-center text-sm text-slate-500">No blog posts yet</td></tr>
+              <tr><td colSpan={5} className="px-5 py-10 text-center text-[13px] text-slate-400">No blog posts yet</td></tr>
             )}
           </tbody>
         </table>

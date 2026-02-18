@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 const universities = [
   "University of Oxford", "University of Cambridge", "Imperial College London",
   "UCL", "LSE", "University of Edinburgh", "King's College London",
@@ -11,19 +9,19 @@ const universities = [
 ];
 
 export function TrustStrip() {
+  const items = [...universities, ...universities];
+
   return (
-    <section className="relative overflow-hidden border-y border-slate-200/50 bg-slate-50/50 py-6 dark:border-white/5 dark:bg-slate-900/50">
-      <div className="flex">
-        <motion.div
-          animate={{ x: [0, -1920] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="flex shrink-0 items-center gap-12">
-          {[...universities, ...universities].map((uni, i) => (
-            <span key={i} className="whitespace-nowrap text-sm font-medium text-slate-400 dark:text-slate-500">
-              {uni}
-            </span>
-          ))}
-        </motion.div>
+    <section className="relative overflow-hidden border-y border-slate-100 bg-white/60 py-5 dark:border-white/[0.04] dark:bg-slate-950/60">
+      <div className="absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white dark:from-slate-950 to-transparent" />
+      <div className="absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white dark:from-slate-950 to-transparent" />
+
+      <div className="flex animate-marquee">
+        {items.map((uni, i) => (
+          <span key={i} className="mx-6 shrink-0 whitespace-nowrap text-[13px] font-medium tracking-wide text-slate-400/70 dark:text-slate-600 sm:mx-8">
+            {uni}
+          </span>
+        ))}
       </div>
     </section>
   );

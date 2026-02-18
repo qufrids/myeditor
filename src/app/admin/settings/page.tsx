@@ -3,11 +3,15 @@
 export default function AdminSettingsPage() {
   return (
     <div>
-      <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Settings</h1>
-      <p className="mt-1 text-sm text-slate-500">Manage site settings</p>
+      <div className="mb-8">
+        <h1 className="text-[22px] font-bold tracking-[-0.02em] text-slate-900 dark:text-white">Settings</h1>
+        <p className="mt-0.5 text-[13px] text-slate-500">Manage site configuration</p>
+      </div>
 
-      <div className="mt-8 rounded-xl border border-slate-200 bg-white p-6 dark:border-white/10 dark:bg-slate-900">
-        <p className="text-sm text-slate-500">Site settings management coming soon. You can manage your site configuration from the database directly.</p>
+      <div className="rounded-2xl border border-slate-200/60 bg-white p-6 dark:border-white/[0.04] dark:bg-white/[0.02]">
+        <p className="text-[13px] leading-[1.7] text-slate-500 dark:text-slate-400">
+          Site settings management coming soon. You can manage your site configuration directly from the database.
+        </p>
       </div>
     </div>
   );

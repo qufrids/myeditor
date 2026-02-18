@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import {
@@ -12,9 +13,9 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const services = [
-  { name: "Assignment Help", href: "/services/assignment", icon: FileText, description: "Expert assignment assistance across all disciplines" },
+  { name: "Assignment Help", href: "/services/assignment", icon: FileText, description: "Expert assistance across all disciplines" },
   { name: "Essay Writing", href: "/services/essay", icon: PenTool, description: "Compelling essays crafted to perfection" },
-  { name: "Coursework Support", href: "/services/coursework", icon: BookOpen, description: "Comprehensive coursework guidance & support" },
+  { name: "Coursework Support", href: "/services/coursework", icon: BookOpen, description: "Comprehensive coursework guidance" },
   { name: "Dissertation Writing", href: "/services/dissertation", icon: GraduationCap, description: "PhD-level dissertation expertise" },
 ];
 
@@ -28,6 +29,7 @@ const navLinks = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -38,7 +40,7 @@ export function Navbar() {
   useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -48,52 +50,71 @@ export function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-500 backdrop-blur-xl",
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
       scrolled
-        ? "bg-white/80 dark:bg-slate-950/85 shadow-[0_1px_40px_rgba(0,0,0,0.06)] dark:shadow-[0_1px_40px_rgba(0,0,0,0.3)]"
-        : "bg-white/50 dark:bg-slate-950/50"
+        ? "bg-white/85 dark:bg-slate-950/90 backdrop-blur-2xl shadow-[0_1px_0_rgba(0,0,0,0.04),0_4px_40px_rgba(0,0,0,0.04)] dark:shadow-[0_1px_0_rgba(255,255,255,0.03)]"
+        : "bg-transparent"
     )}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-18 items-center justify-between lg:h-20">
-          <Link href="/" className="group flex items-center gap-2">
-            <div className="relative flex items-center">
-              <Crown className="h-5 w-5 text-amber-500 transition-transform duration-300 group-hover:scale-110" />
+      {/* Subtle bottom border on scroll */}
+      <div className={cn(
+        "absolute inset-x-0 bottom-0 h-px transition-opacity duration-500",
+        scrolled ? "opacity-100 bg-gradient-to-r from-transparent via-slate-200 to-transparent dark:via-white/[0.06]" : "opacity-0"
+      )} />
+
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between sm:h-[72px]">
+          {/* Logo */}
+          <Link href="/" className="group flex items-center gap-2.5 shrink-0">
+            <div className="relative">
+              <Crown className="h-5 w-5 text-amber-500 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-6deg]" />
             </div>
-            <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-xl font-bold tracking-tight text-transparent dark:from-white dark:to-slate-300">
+            <span className="text-[17px] font-bold tracking-[-0.02em] text-slate-900 dark:text-white">
               EditorsForUK
             </span>
           </Link>
 
-          <div className="hidden items-center gap-1 lg:flex">
+          {/* Desktop Navigation */}
+          <div className="hidden items-center gap-0.5 lg:flex">
             {navLinks.map((link) =>
               link.hasDropdown ? (
                 <div key={link.name} className="relative"
                   onMouseEnter={() => setServicesOpen(true)}
                   onMouseLeave={() => setServicesOpen(false)}>
-                  <button className="flex items-center gap-1 rounded-lg px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">
+                  <button className={cn(
+                    "flex items-center gap-1 rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200",
+                    isActive(link.href)
+                      ? "text-slate-900 dark:text-white"
+                      : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                  )}>
                     {link.name}
-                    <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", servicesOpen && "rotate-180")} />
+                    <ChevronDown className={cn(
+                      "h-3 w-3 transition-transform duration-200",
+                      servicesOpen && "rotate-180"
+                    )} />
                   </button>
                   <AnimatePresence>
                     {servicesOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute left-1/2 top-full pt-3 -translate-x-1/2 w-[420px]">
-                        <div className="overflow-hidden rounded-2xl border p-2 border-white/20 bg-white/80 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.08)] dark:border-white/10 dark:bg-slate-900/90">
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 6 }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
+                        className="absolute left-1/2 top-full pt-2 -translate-x-1/2 w-[380px]">
+                        <div className="overflow-hidden rounded-2xl border border-slate-200/60 bg-white/95 p-1.5 backdrop-blur-2xl shadow-[0_16px_64px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] dark:border-white/[0.08] dark:bg-slate-900/95 dark:shadow-[0_16px_64px_rgba(0,0,0,0.4)]">
                           {services.map((service) => (
                             <Link key={service.name} href={service.href}
-                              className="group/item flex items-start gap-4 rounded-xl p-3.5 transition-colors hover:bg-slate-100/80 dark:hover:bg-white/5">
-                              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-500/10 dark:to-indigo-500/10 transition-transform group-hover/item:scale-105">
-                                <service.icon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                              className="group/item flex items-center gap-3.5 rounded-xl p-3 transition-all duration-150 hover:bg-slate-50 dark:hover:bg-white/[0.04]">
+                              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-500/10 transition-transform duration-200 group-hover/item:scale-105">
+                                <service.icon className="h-[18px] w-[18px] text-blue-600 dark:text-blue-400" />
                               </div>
                               <div>
-                                <p className="text-sm font-semibold text-slate-900 dark:text-white">{service.name}</p>
-                                <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{service.description}</p>
+                                <p className="text-[13px] font-semibold text-slate-900 dark:text-white">{service.name}</p>
+                                <p className="text-[11px] text-slate-500 dark:text-slate-500 leading-snug">{service.description}</p>
                               </div>
                             </Link>
                           ))}
@@ -104,34 +125,43 @@ export function Navbar() {
                 </div>
               ) : (
                 <Link key={link.name} href={link.href}
-                  className="rounded-lg px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">
+                  className={cn(
+                    "rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200",
+                    isActive(link.href)
+                      ? "text-slate-900 dark:text-white"
+                      : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                  )}>
                   {link.name}
                 </Link>
               )
             )}
           </div>
 
-          <div className="flex items-center gap-3">
+          {/* Right Section */}
+          <div className="flex items-center gap-2">
+            {/* Theme Toggle */}
             <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="relative flex h-9 w-9 items-center justify-center rounded-xl text-slate-500 transition-all hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white"
+              className="relative flex h-9 w-9 items-center justify-center rounded-full text-slate-400 transition-all duration-200 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-white/[0.06] dark:hover:text-slate-300"
               aria-label="Toggle theme">
               {mounted && (
                 <AnimatePresence mode="wait">
-                  <motion.div key={theme} initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                    {theme === "dark" ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
+                  <motion.div key={theme} initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                   </motion.div>
                 </AnimatePresence>
               )}
             </button>
 
+            {/* CTA Button - Desktop */}
             <div className="hidden lg:block">
-              <Button variant="luxury" size="md" asChild>
+              <Button variant="luxury" size="sm" asChild>
                 <Link href="/order">Order Now</Link>
               </Button>
             </div>
 
+            {/* Mobile Hamburger */}
             <button onClick={() => setMobileOpen(!mobileOpen)}
-              className="flex h-9 w-9 items-center justify-center rounded-xl lg:hidden text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/10"
+              className="flex h-9 w-9 items-center justify-center rounded-full lg:hidden text-slate-500 hover:bg-slate-100 dark:hover:bg-white/[0.06]"
               aria-label="Toggle menu">
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -139,59 +169,86 @@ export function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden"
               onClick={() => setMobileOpen(false)} />
             <motion.div
               initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="fixed right-0 top-0 z-50 h-full w-[320px] lg:hidden bg-white/95 backdrop-blur-2xl dark:bg-slate-950/95 border-l border-slate-200/50 dark:border-white/10">
-              <div className="flex h-18 items-center justify-between px-6">
+              transition={{ type: "spring", damping: 28, stiffness: 280 }}
+              className="fixed right-0 top-0 z-50 flex h-full w-[min(85vw,360px)] flex-col lg:hidden bg-white dark:bg-slate-950 border-l border-slate-200/50 dark:border-white/[0.06] shadow-[-16px_0_48px_rgba(0,0,0,0.06)]">
+
+              {/* Drawer Header */}
+              <div className="flex h-16 items-center justify-between px-5 border-b border-slate-100 dark:border-white/[0.06]">
                 <Link href="/" className="flex items-center gap-2" onClick={() => setMobileOpen(false)}>
                   <Crown className="h-5 w-5 text-amber-500" />
-                  <span className="text-lg font-bold text-slate-900 dark:text-white">EditorsForUK</span>
+                  <span className="text-[15px] font-bold text-slate-900 dark:text-white">EditorsForUK</span>
                 </Link>
-                <button onClick={() => setMobileOpen(false)} className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-white/10">
-                  <X className="h-5 w-5" />
+                <button onClick={() => setMobileOpen(false)}
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 dark:hover:bg-white/[0.06]">
+                  <X className="h-4 w-4" />
                 </button>
               </div>
-              <div className="flex flex-col gap-1 px-4 py-4">
-                {navLinks.map((link) =>
-                  link.hasDropdown ? (
-                    <div key={link.name}>
-                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                        className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5">
-                        {link.name}
-                        <ChevronDown className={cn("h-4 w-4 transition-transform", mobileServicesOpen && "rotate-180")} />
-                      </button>
-                      <AnimatePresence>
-                        {mobileServicesOpen && (
-                          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                            <div className="flex flex-col gap-1 py-1 pl-4">
-                              {services.map((service) => (
-                                <Link key={service.name} href={service.href} onClick={() => setMobileOpen(false)}
-                                  className="flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5">
-                                  <service.icon className="h-4 w-4 text-blue-500" />
-                                  {service.name}
-                                </Link>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  ) : (
-                    <Link key={link.name} href={link.href} onClick={() => setMobileOpen(false)}
-                      className="block rounded-xl px-4 py-3 text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5">
-                      {link.name}
-                    </Link>
-                  )
-                )}
+
+              {/* Drawer Links */}
+              <div className="flex-1 overflow-y-auto px-3 py-4">
+                <div className="flex flex-col gap-0.5">
+                  {navLinks.map((link, i) =>
+                    link.hasDropdown ? (
+                      <div key={link.name}>
+                        <motion.button
+                          initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.04 }}
+                          onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                          className={cn(
+                            "flex w-full items-center justify-between rounded-xl px-4 py-3 text-[15px] font-medium transition-colors",
+                            isActive(link.href)
+                              ? "text-slate-900 dark:text-white bg-slate-50 dark:bg-white/[0.04]"
+                              : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/[0.03]"
+                          )}>
+                          {link.name}
+                          <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", mobileServicesOpen && "rotate-180")} />
+                        </motion.button>
+                        <AnimatePresence>
+                          {mobileServicesOpen && (
+                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} className="overflow-hidden">
+                              <div className="flex flex-col gap-0.5 py-1 pl-3">
+                                {services.map((service) => (
+                                  <Link key={service.name} href={service.href} onClick={() => setMobileOpen(false)}
+                                    className="flex items-center gap-3 rounded-lg px-4 py-2.5 text-[13px] text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/[0.03] hover:text-slate-900 dark:hover:text-white transition-colors">
+                                    <service.icon className="h-4 w-4 text-blue-500 shrink-0" />
+                                    {service.name}
+                                  </Link>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ) : (
+                      <motion.div key={link.name} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.04 }}>
+                        <Link href={link.href} onClick={() => setMobileOpen(false)}
+                          className={cn(
+                            "block rounded-xl px-4 py-3 text-[15px] font-medium transition-colors",
+                            isActive(link.href)
+                              ? "text-slate-900 dark:text-white bg-slate-50 dark:bg-white/[0.04]"
+                              : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/[0.03]"
+                          )}>
+                          {link.name}
+                        </Link>
+                      </motion.div>
+                    )
+                  )}
+                </div>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 border-t border-slate-200/50 p-6 dark:border-white/10">
+
+              {/* Mobile CTA */}
+              <div className="border-t border-slate-100 dark:border-white/[0.06] p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
                 <Button variant="luxury" size="lg" className="w-full" asChild>
                   <Link href="/order" onClick={() => setMobileOpen(false)}>Order Now</Link>
                 </Button>
