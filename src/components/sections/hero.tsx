@@ -55,11 +55,23 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
           className="mt-9 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center sm:gap-4">
-          <Button variant="luxury" size="xl" asChild>
-            <Link href="/order" className="gap-2">
-              Get Started <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
+
+          {/* Premium CTA button with shimmer + glow */}
+          <Link
+            href="/order"
+            className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 px-8 py-[15px] text-[15px] font-bold tracking-tight text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12)_inset,0_6px_32px_rgba(37,99,235,0.48)] transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.2)_inset,0_10px_52px_rgba(37,99,235,0.65)] hover:brightness-110 active:scale-[0.98] active:translate-y-0 sm:px-9 sm:py-4 sm:text-[16px]"
+          >
+            {/* Top gloss highlight */}
+            <span className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-full bg-gradient-to-b from-white/[0.22] to-transparent" />
+            {/* Sweeping shimmer streak */}
+            <span
+              className="animate-shimmer absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.16] to-transparent"
+              style={{ backgroundSize: "200% 100%" }}
+            />
+            <span className="relative">Get Started</span>
+            <ArrowRight className="relative h-[18px] w-[18px] transition-transform duration-200 group-hover:translate-x-1" />
+          </Link>
+
           <Button
             variant="outline"
             size="xl"

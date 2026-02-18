@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Blog" };
 
 export default async function BlogPage() {

@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { Star } from "lucide-react";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Reviews" };
 
 export default async function ReviewsPage() {

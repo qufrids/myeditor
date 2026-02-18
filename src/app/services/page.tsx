@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { FileText, PenTool, BookOpen, GraduationCap, ArrowRight } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 const iconMap: Record<string, React.ElementType> = {
   FileText, PenTool, BookOpen, GraduationCap,
 };

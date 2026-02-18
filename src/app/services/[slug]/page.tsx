@@ -4,6 +4,32 @@ import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+/** Safely parse a Prisma Json field into a string array.
+ *  Handles: null, string[], double-encoded JSON strings, and {title,...}[] objects. */
+function toStringArray(val: unknown): string[] {
+  if (!val) return [];
+  // Already a proper array
+  if (Array.isArray(val)) {
+    return val.map((item) =>
+      typeof item === "string" ? item : (item as { title?: string }).title ?? String(item)
+    );
+  }
+  // Stored as a double-encoded JSON string (seed bug)
+  if (typeof val === "string") {
+    try {
+      const parsed: unknown = JSON.parse(val);
+      if (Array.isArray(parsed)) {
+        return parsed.map((item) =>
+          typeof item === "string" ? item : (item as { title?: string }).title ?? String(item)
+        );
+      }
+    } catch {
+      return [];
+    }
+  }
+  return [];
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   try {
@@ -30,8 +56,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   if (!service) return notFound();
 
-  const features = (service.features as string[] | null) || [];
-  const benefits = (service.benefits as string[] | null) || [];
+  const features = toStringArray(service.features);
+  const benefits = toStringArray(service.benefits);
 
   return (
     <div>

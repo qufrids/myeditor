@@ -30,28 +30,28 @@ async function main() {
       icon: "FileText",
       heroTitle: "Premium Assignment Writing Service",
       heroSubtitle: "Get expertly crafted assignments that exceed expectations",
-      features: JSON.stringify([
+      features: [
         "Custom-written from scratch",
         "Subject-specialist writers",
         "Thorough research & analysis",
         "Proper academic formatting",
         "Free plagiarism report",
-        "Unlimited revisions"
-      ]),
-      benefits: JSON.stringify([
-        { title: "Expert Writers", description: "PhD-qualified writers with deep subject expertise" },
-        { title: "Original Content", description: "100% plagiarism-free, custom-written work" },
-        { title: "On-Time Delivery", description: "Never miss a deadline with our reliable service" },
-        { title: "Quality Assured", description: "Multi-stage quality checks before delivery" },
-        { title: "Any Subject", description: "Coverage across all academic disciplines" },
-        { title: "Affordable Pricing", description: "Competitive rates with no hidden charges" }
-      ]),
-      process: JSON.stringify([
+        "Unlimited revisions",
+      ],
+      benefits: [
+        "Expert Writers — PhD-qualified with deep subject expertise",
+        "Original Content — 100% plagiarism-free, custom-written work",
+        "On-Time Delivery — Never miss a deadline with our reliable service",
+        "Quality Assured — Multi-stage quality checks before delivery",
+        "Any Subject — Coverage across all academic disciplines",
+        "Affordable Pricing — Competitive rates with no hidden charges",
+      ],
+      process: [
         { step: 1, title: "Submit Requirements", description: "Share your assignment brief, guidelines, and deadline" },
         { step: 2, title: "Writer Assignment", description: "We match you with the best expert in your field" },
         { step: 3, title: "Research & Writing", description: "Your writer crafts a thorough, well-researched piece" },
-        { step: 4, title: "Quality Check & Delivery", description: "Final review, plagiarism check, and on-time delivery" }
-      ]),
+        { step: 4, title: "Quality Check & Delivery", description: "Final review, plagiarism check, and on-time delivery" },
+      ],
       metaTitle: "Assignment Writing Service UK | Expert Academic Help | EditorsForUK",
       metaDesc: "Get premium assignment writing help from UK-based experts. Custom-written, plagiarism-free assignments delivered on time. Order now!",
       sortOrder: 1,
@@ -64,28 +64,28 @@ async function main() {
       icon: "BookOpen",
       heroTitle: "Expert Essay Writing Service",
       heroSubtitle: "Articulate, well-researched essays that impress",
-      features: JSON.stringify([
+      features: [
         "Compelling arguments",
         "Critical analysis",
         "Proper citations",
         "Multiple essay types",
         "Free bibliography",
-        "Revision guarantee"
-      ]),
-      benefits: JSON.stringify([
-        { title: "Skilled Writers", description: "Writers experienced in all essay formats and styles" },
-        { title: "Strong Arguments", description: "Well-structured arguments backed by credible sources" },
-        { title: "Perfect Citations", description: "Harvard, APA, MLA, Chicago — any style" },
-        { title: "Fast Turnaround", description: "Urgent essays delivered within 24 hours" },
-        { title: "Grade Guarantee", description: "We aim for the highest possible grade" },
-        { title: "Full Support", description: "Direct communication with your writer" }
-      ]),
-      process: JSON.stringify([
+        "Revision guarantee",
+      ],
+      benefits: [
+        "Skilled Writers — Experienced in all essay formats and styles",
+        "Strong Arguments — Well-structured, backed by credible sources",
+        "Perfect Citations — Harvard, APA, MLA, Chicago — any style",
+        "Fast Turnaround — Urgent essays delivered within 24 hours",
+        "Grade Guarantee — We aim for the highest possible grade",
+        "Full Support — Direct communication with your writer",
+      ],
+      process: [
         { step: 1, title: "Share Your Topic", description: "Provide essay topic, requirements, and referencing style" },
         { step: 2, title: "Expert Matching", description: "Paired with a writer specialising in your subject" },
         { step: 3, title: "Drafting & Review", description: "Carefully crafted with rigorous academic standards" },
-        { step: 4, title: "Final Delivery", description: "Polished essay delivered with plagiarism report" }
-      ]),
+        { step: 4, title: "Final Delivery", description: "Polished essay delivered with plagiarism report" },
+      ],
       metaTitle: "Essay Writing Service UK | Professional Essay Help | EditorsForUK",
       metaDesc: "Premium essay writing service by UK academic experts. Well-argued, properly cited essays delivered on time. Get started today!",
       sortOrder: 2,
@@ -98,28 +98,28 @@ async function main() {
       icon: "GraduationCap",
       heroTitle: "Professional Coursework Writing Service",
       heroSubtitle: "Comprehensive coursework that showcases your learning",
-      features: JSON.stringify([
+      features: [
         "Module-specific expertise",
         "Comprehensive coverage",
         "Practical applications",
         "Data analysis support",
         "Proper methodology",
-        "Full referencing"
-      ]),
-      benefits: JSON.stringify([
-        { title: "Module Experts", description: "Writers familiar with UK university module structures" },
-        { title: "Complete Solutions", description: "Every section covered thoroughly and accurately" },
-        { title: "Research Depth", description: "Extensive research with academic and industry sources" },
-        { title: "Practical Focus", description: "Real-world applications and case studies included" },
-        { title: "Flexible Deadlines", description: "From urgent to extended timelines" },
-        { title: "Continuous Support", description: "Updates and revisions throughout the process" }
-      ]),
-      process: JSON.stringify([
+        "Full referencing",
+      ],
+      benefits: [
+        "Module Experts — Writers familiar with UK university module structures",
+        "Complete Solutions — Every section covered thoroughly and accurately",
+        "Research Depth — Extensive research with academic and industry sources",
+        "Practical Focus — Real-world applications and case studies included",
+        "Flexible Deadlines — From urgent to extended timelines",
+        "Continuous Support — Updates and revisions throughout the process",
+      ],
+      process: [
         { step: 1, title: "Provide Module Details", description: "Share your module handbook, brief, and marking criteria" },
         { step: 2, title: "Expert Selection", description: "Matched with a specialist in your specific module" },
         { step: 3, title: "In-Depth Development", description: "Thorough research and structured writing" },
-        { step: 4, title: "Review & Submit", description: "Quality assured and delivered for your review" }
-      ]),
+        { step: 4, title: "Review & Submit", description: "Quality assured and delivered for your review" },
+      ],
       metaTitle: "Coursework Writing Service UK | Expert Coursework Help | EditorsForUK",
       metaDesc: "Get professional coursework writing help from UK experts. Comprehensive, well-researched coursework delivered on time. Order now!",
       sortOrder: 3,
@@ -132,28 +132,28 @@ async function main() {
       icon: "Scroll",
       heroTitle: "Premium Dissertation Writing Service",
       heroSubtitle: "Your path to academic distinction starts here",
-      features: JSON.stringify([
+      features: [
         "PhD-qualified writers",
         "Chapter-by-chapter support",
         "Original research design",
         "Statistical analysis",
         "Literature review expertise",
-        "Viva preparation guidance"
-      ]),
-      benefits: JSON.stringify([
-        { title: "PhD Writers", description: "Writers who have completed their own dissertations" },
-        { title: "Full Chapters", description: "From introduction to conclusion, every chapter covered" },
-        { title: "Research Design", description: "Robust methodology and framework development" },
-        { title: "Data Analysis", description: "Quantitative, qualitative, or mixed methods support" },
-        { title: "Iterative Process", description: "Regular drafts and supervisor feedback integration" },
-        { title: "Confidential", description: "Complete privacy and non-disclosure guaranteed" }
-      ]),
-      process: JSON.stringify([
+        "Viva preparation guidance",
+      ],
+      benefits: [
+        "PhD Writers — Writers who have completed their own dissertations",
+        "Full Chapters — From introduction to conclusion, every chapter covered",
+        "Research Design — Robust methodology and framework development",
+        "Data Analysis — Quantitative, qualitative, or mixed methods support",
+        "Iterative Process — Regular drafts and supervisor feedback integration",
+        "Confidential — Complete privacy and non-disclosure guaranteed",
+      ],
+      process: [
         { step: 1, title: "Initial Consultation", description: "Discuss your research area, objectives, and timeline" },
         { step: 2, title: "Proposal & Planning", description: "Develop research proposal and detailed plan" },
         { step: 3, title: "Chapter Development", description: "Systematic writing with regular progress updates" },
-        { step: 4, title: "Review & Refinement", description: "Thorough review, editing, and final polish" }
-      ]),
+        { step: 4, title: "Review & Refinement", description: "Thorough review, editing, and final polish" },
+      ],
       metaTitle: "Dissertation Writing Service UK | PhD Expert Help | EditorsForUK",
       metaDesc: "Premium dissertation writing service by PhD-qualified experts. Full chapter support, original research, confidential service. Start today!",
       sortOrder: 4,
@@ -328,7 +328,7 @@ async function main() {
       excerpt: "Discover the proven strategies and techniques that distinguish a first-class essay from the rest. From structuring your argument to perfecting your citations.",
       content: `<h2>Introduction</h2><p>Writing a first-class essay requires more than just good writing skills. It demands critical thinking, thorough research, and a clear argumentative structure. In this comprehensive guide, we'll walk you through the essential steps to crafting an essay that stands out.</p><h2>Understanding the Question</h2><p>Before you write a single word, spend time truly understanding what the essay question is asking. Break it down into its component parts. Identify the key terms, the instruction words (analyse, evaluate, discuss), and the scope of the question.</p><h2>Research Strategy</h2><p>A first-class essay demonstrates wide reading and engagement with scholarly sources. Use your university library databases, Google Scholar, and recommended reading lists. Aim for a mix of seminal texts and recent publications.</p><h2>Structure and Argument</h2><p>Your essay should have a clear thesis statement, logically organised paragraphs, and a compelling conclusion. Each paragraph should make one key point, supported by evidence and analysis.</p><h2>Critical Analysis</h2><p>Don't just describe — analyse. Evaluate the strengths and weaknesses of different arguments. Show that you can think independently and engage critically with the material.</p><h2>Conclusion</h2><p>A strong conclusion doesn't just summarise — it synthesises. Bring together your key arguments and show how they answer the original question. Leave the reader with a clear sense of your position.</p>`,
       category: "Academic Writing",
-      tags: JSON.stringify(["essay writing", "study tips", "academic skills"]),
+      tags: ["essay writing", "study tips", "academic skills"],
       isPublished: true,
       metaTitle: "How to Write a First-Class Essay | EditorsForUK Blog",
       metaDesc: "Learn proven strategies for writing first-class essays. Expert tips on research, structure, and critical analysis from EditorsForUK.",
@@ -339,7 +339,7 @@ async function main() {
       excerpt: "Avoid these common pitfalls that can derail your dissertation. Learn from the experiences of thousands of students and set yourself up for success.",
       content: `<h2>Introduction</h2><p>Your dissertation is likely the most significant piece of academic work you'll undertake. Yet many students make avoidable mistakes that compromise their results. Here are the top 10 pitfalls to watch out for.</p><h2>1. Starting Too Late</h2><p>Procrastination is the enemy of a good dissertation. Start your research and planning early, even if writing begins later.</p><h2>2. Choosing Too Broad a Topic</h2><p>A focused, well-defined research question is essential. Trying to cover too much ground leads to superficial analysis.</p><h2>3. Poor Literature Review</h2><p>Your lit review should be critical and analytical, not just a summary of sources. Show how existing research relates to your study.</p><h2>4. Weak Methodology</h2><p>Justify your methodological choices clearly. Explain why your approach is the most appropriate for your research question.</p><h2>5. Ignoring Supervisor Feedback</h2><p>Your supervisor's expertise is invaluable. Take their feedback seriously and incorporate it into your revisions.</p><h2>6. Inconsistent Referencing</h2><p>Choose a referencing style and stick to it consistently throughout. Use referencing management software to help.</p><h2>7. Neglecting Proofreading</h2><p>Grammatical errors and typos undermine your credibility. Always proofread thoroughly before submission.</p><h2>8. Data Overload Without Analysis</h2><p>Presenting data without interpreting it adds no value. Always analyse what your findings mean.</p><h2>9. Weak Conclusion</h2><p>Your conclusion should address your research question directly and discuss the implications of your findings.</p><h2>10. Not Backing Up Your Work</h2><p>Use cloud storage and multiple backups. Losing your work to a technical failure is devastating and avoidable.</p>`,
       category: "Research",
-      tags: JSON.stringify(["dissertation", "research tips", "common mistakes"]),
+      tags: ["dissertation", "research tips", "common mistakes"],
       isPublished: true,
       metaTitle: "Top 10 Dissertation Mistakes to Avoid | EditorsForUK Blog",
       metaDesc: "Avoid common dissertation pitfalls. Expert advice on planning, writing, and completing your dissertation successfully.",
@@ -350,7 +350,7 @@ async function main() {
       excerpt: "Master the Harvard referencing system with our detailed guide. From in-text citations to reference lists, learn everything you need to know.",
       content: `<h2>What is Harvard Referencing?</h2><p>Harvard referencing is one of the most widely used citation systems in UK universities. It uses an author-date format for in-text citations and a detailed reference list at the end of your work.</p><h2>In-Text Citations</h2><p>When you reference a source in your text, include the author's surname and the year of publication in brackets, e.g., (Smith, 2023). For direct quotes, include the page number: (Smith, 2023, p. 45).</p><h2>Reference List</h2><p>Your reference list should appear at the end of your work, organised alphabetically by author surname. Each entry should include the full details needed to locate the source.</p><h2>Books</h2><p>Author, A.B. (Year) Title of book. Edition. Place of publication: Publisher.</p><h2>Journal Articles</h2><p>Author, A.B. (Year) 'Title of article', Journal Name, Volume(Issue), pp. xx-xx.</p><h2>Websites</h2><p>Author/Organisation (Year) Title of page. Available at: URL (Accessed: Date).</p><h2>Tips for Success</h2><p>Be consistent, use referencing management tools like Mendeley or Zotero, and always check your university's specific requirements as there can be slight variations.</p>`,
       category: "Study Tips",
-      tags: JSON.stringify(["referencing", "harvard", "citations", "academic writing"]),
+      tags: ["referencing", "harvard", "citations", "academic writing"],
       isPublished: true,
       metaTitle: "Harvard Referencing Guide | EditorsForUK Blog",
       metaDesc: "Complete guide to Harvard referencing. Learn in-text citations, reference lists, and formatting rules for UK universities.",
