@@ -6,7 +6,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
-import Image from "next/image";
 import {
   Menu, X, Sun, Moon, ChevronDown,
   FileText, PenTool, BookOpen, GraduationCap,
@@ -93,15 +92,16 @@ export function Navbar() {
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between sm:h-[72px]">
             {/* Logo */}
-            <Link href="/" className="group flex items-center shrink-0">
-              <Image
-                src="/images/hero/cambridgewriters_logo.png"
-                alt="cambridgewriters"
-                width={180}
-                height={40}
-                className="h-9 w-auto object-contain"
-                priority
-              />
+            <Link href="/" className="group flex items-center gap-2 shrink-0">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-violet-600 shadow-[0_2px_8px_rgba(37,99,235,0.35)] transition-transform duration-200 group-hover:scale-105">
+                <svg className="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+              </div>
+              <div className="flex items-baseline gap-[1px]">
+                <span className="text-[15px] font-semibold tracking-[-0.03em] text-slate-800 dark:text-white">cambridge</span>
+                <span className="text-[15px] font-bold tracking-[-0.03em] text-blue-600 dark:text-blue-400">writers</span>
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
@@ -217,14 +217,16 @@ export function Navbar() {
 
                 {/* Drawer Header */}
                 <div className="flex h-16 items-center justify-between px-5 border-b border-slate-100 dark:border-white/[0.06]">
-                  <Link href="/" className="flex items-center" onClick={closeMobileMenu}>
-                    <Image
-                      src="/images/hero/cambridgewriters_logo.png"
-                      alt="cambridgewriters"
-                      width={160}
-                      height={36}
-                      className="h-8 w-auto object-contain"
-                    />
+                  <Link href="/" className="flex items-center gap-2" onClick={closeMobileMenu}>
+                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-violet-600 shadow-[0_2px_8px_rgba(37,99,235,0.35)]">
+                      <svg className="h-3.5 w-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                      </svg>
+                    </div>
+                    <div className="flex items-baseline gap-[1px]">
+                      <span className="text-[14px] font-semibold tracking-[-0.03em] text-slate-800 dark:text-white">cambridge</span>
+                      <span className="text-[14px] font-bold tracking-[-0.03em] text-blue-600 dark:text-blue-400">writers</span>
+                    </div>
                   </Link>
                   <button onClick={closeMobileMenu}
                     className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 dark:hover:bg-white/[0.06]">

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const quickLinks = [
@@ -33,14 +32,16 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:gap-10 lg:grid-cols-4 lg:gap-8">
           {/* Column 1: Brand */}
           <div className="col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-flex items-center">
-              <Image
-                src="/images/hero/cambridgewriters_logo.png"
-                alt="cambridgewriters"
-                width={160}
-                height={36}
-                className="h-8 w-auto object-contain"
-              />
+            <Link href="/" className="inline-flex items-center gap-2 group">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-violet-600 shadow-[0_2px_8px_rgba(37,99,235,0.35)] transition-transform duration-200 group-hover:scale-105">
+                <svg className="h-3.5 w-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+              </div>
+              <div className="flex items-baseline gap-[1px]">
+                <span className="text-[14px] font-semibold tracking-[-0.03em] text-slate-800 dark:text-white">cambridge</span>
+                <span className="text-[14px] font-bold tracking-[-0.03em] text-blue-600 dark:text-blue-400">writers</span>
+              </div>
             </Link>
             <p className="mt-4 max-w-[260px] text-[13px] leading-[1.7] text-slate-500 dark:text-slate-500">
               Connecting students with world-class academic writers. Bespoke work tailored to UK university standards.
