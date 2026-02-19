@@ -2,18 +2,26 @@ import { prisma } from "@/lib/prisma";
 import { FileText, Star, MessageSquare, BookOpen } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 
-export default async function AdminDashboard() {
-  const [services, testimonials, inquiries, blogPosts] = await Promise.all([
-    prisma.service.count(),
-    prisma.testimonial.count(),
-    prisma.inquiry.count(),
-    prisma.blogPost.count(),
-  ]);
+export const dynamic = "force-dynamic";
 
-  const recentInquiries = await prisma.inquiry.findMany({
-    take: 5,
-    orderBy: { createdAt: "desc" },
-  });
+export default async function AdminDashboard() {
+  let services = 0, testimonials = 0, inquiries = 0, blogPosts = 0;
+  let recentInquiries: Awaited<ReturnType<typeof prisma.inquiry.findMany>> = [];
+
+  try {
+    [services, testimonials, inquiries, blogPosts] = await Promise.all([
+      prisma.service.count(),
+      prisma.testimonial.count(),
+      prisma.inquiry.count(),
+      prisma.blogPost.count(),
+    ]);
+    recentInquiries = await prisma.inquiry.findMany({
+      take: 5,
+      orderBy: { createdAt: "desc" },
+    });
+  } catch {
+    // DB unavailable — show zeros gracefully
+  }
 
   const stats = [
     { label: "Services", value: services, icon: FileText, color: "from-blue-500 to-blue-600" },
@@ -26,7 +34,7 @@ export default async function AdminDashboard() {
     <div>
       <div className="mb-8">
         <h1 className="text-[22px] font-bold tracking-[-0.02em] text-slate-900 dark:text-white">Dashboard</h1>
-        <p className="mt-0.5 text-[13px] text-slate-500">Welcome back to EditorsForUK Admin</p>
+        <p className="mt-0.5 text-[13px] text-slate-500">Welcome back to cambridgewriters Admin</p>
       </div>
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">

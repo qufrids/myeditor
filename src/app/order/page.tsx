@@ -65,6 +65,8 @@ export default function OrderPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Guard: Enter key on step 0/1 should advance, not submit
+    if (step < 2) { go(step + 1); return; }
     setLoading(true);
     try {
       await fetch("/api/inquiries", {
