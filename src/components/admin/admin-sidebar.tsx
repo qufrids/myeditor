@@ -45,7 +45,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
             <Crown className="h-4 w-4 text-white" />
           </div>
           {!collapsed && (
-            <span className="text-[13px] font-bold tracking-[-0.01em] text-slate-900 dark:text-white">EditorsForUK</span>
+            <span className="text-[13px] font-bold tracking-[-0.01em] text-slate-900 dark:text-white">cambridgewriters</span>
           )}
         </Link>
         <button
