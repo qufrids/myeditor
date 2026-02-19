@@ -7,7 +7,23 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const inquiry = await prisma.inquiry.create({ data: body });
-  return NextResponse.json(inquiry, { status: 201 });
+  try {
+    const body = await req.json();
+    const inquiry = await prisma.inquiry.create({
+      data: {
+        name: body.name ?? "",
+        email: body.email ?? "",
+        phone: body.phone || null,
+        service: body.service || "general",
+        academicLevel: body.academicLevel || null,
+        deadline: body.deadline || null,
+        wordCount: body.wordCount ? Number(body.wordCount) : null,
+        instructions: body.instructions || null,
+      },
+    });
+    return NextResponse.json(inquiry, { status: 201 });
+  } catch (err) {
+    console.error("[inquiries POST]", err);
+    return NextResponse.json({ error: "Failed to save inquiry" }, { status: 500 });
+  }
 }

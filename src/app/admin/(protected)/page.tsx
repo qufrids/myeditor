@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import type { Inquiry } from "@prisma/client";
 import { FileText, Star, MessageSquare, BookOpen } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 
@@ -6,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
   let services = 0, testimonials = 0, inquiries = 0, blogPosts = 0;
-  let recentInquiries: Awaited<ReturnType<typeof prisma.inquiry.findMany>> = [];
+  let recentInquiries: Inquiry[] = [];
 
   try {
     [services, testimonials, inquiries, blogPosts] = await Promise.all([

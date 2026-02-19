@@ -56,6 +56,7 @@ export default function OrderPage() {
   const [dir, setDir] = useState(1);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const [form, setForm] = useState({
     name: "", email: "", phone: "", service: "",
     academicLevel: "", deadline: "", wordCount: "", instructions: "",
@@ -63,19 +64,35 @@ export default function OrderPage() {
 
   const go = (next: number) => { setDir(next > step ? 1 : -1); setStep(next); };
 
+  const canAdvance = (s: number) => {
+    if (s === 0) return !!form.service;
+    if (s === 1) return !!form.name && !!form.email;
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Guard: Enter key on step 0/1 should advance, not submit
-    if (step < 2) { go(step + 1); return; }
+    if (step < 2) {
+      if (canAdvance(step)) go(step + 1);
+      return;
+    }
     setLoading(true);
+    setSubmitError(false);
     try {
-      await fetch("/api/inquiries", {
+      const res = await fetch("/api/inquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, wordCount: form.wordCount ? parseInt(form.wordCount) : null }),
       });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(true);
+      }
+    } catch {
+      setSubmitError(true);
     } finally {
-      setSubmitted(true);
       setLoading(false);
     }
   };
@@ -342,24 +359,29 @@ export default function OrderPage() {
                 {step < 2 ? (
                   <button
                     type="button"
-                    onClick={() => go(step + 1)}
-                    disabled={step === 0 && !form.service}
+                    onClick={() => { if (canAdvance(step)) go(step + 1); }}
+                    disabled={!canAdvance(step)}
                     className="flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-2.5 text-[13px] font-bold text-white shadow-[0_4px_16px_rgba(37,99,235,0.35)] transition-all duration-200 hover:-translate-y-[1px] hover:shadow-[0_6px_24px_rgba(37,99,235,0.48)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0"
                   >
                     Continue <ArrowRight className="h-3.5 w-3.5" />
                   </button>
                 ) : (
-                  <button
-                    type="submit"
-                    disabled={loading || !form.name || !form.email}
-                    className="group relative flex items-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 px-7 py-2.5 text-[14px] font-bold text-white shadow-[0_4px_24px_rgba(37,99,235,0.42)] transition-all duration-200 hover:-translate-y-[1px] hover:shadow-[0_8px_36px_rgba(37,99,235,0.58)] disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    <span className="animate-shimmer absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.15] to-transparent" style={{ backgroundSize: "200% 100%" }} />
-                    {loading
-                      ? <Loader2 className="h-4 w-4 animate-spin" />
-                      : <><span className="relative">Submit Order</span><ArrowRight className="relative h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></>
-                    }
-                  </button>
+                  <div className="flex flex-col items-end gap-2">
+                    {submitError && (
+                      <p className="text-[12px] text-red-500">Something went wrong. Please try again or email us directly.</p>
+                    )}
+                    <button
+                      type="submit"
+                      disabled={loading || !form.name || !form.email}
+                      className="group relative flex items-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 px-7 py-2.5 text-[14px] font-bold text-white shadow-[0_4px_24px_rgba(37,99,235,0.42)] transition-all duration-200 hover:-translate-y-[1px] hover:shadow-[0_8px_36px_rgba(37,99,235,0.58)] disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      <span className="animate-shimmer absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.15] to-transparent" style={{ backgroundSize: "200% 100%" }} />
+                      {loading
+                        ? <Loader2 className="h-4 w-4 animate-spin" />
+                        : <><span className="relative">Submit Order</span><ArrowRight className="relative h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></>
+                      }
+                    </button>
+                  </div>
                 )}
               </div>
             </form>
