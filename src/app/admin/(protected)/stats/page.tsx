@@ -4,44 +4,35 @@ import { BarChart3, TrendingUp, Users, MessageSquare, CheckCircle, Clock, FileTe
 export const dynamic = "force-dynamic";
 
 export default async function AdminStatsPage() {
-  let totalInquiries = 0;
-  let newInquiries = 0;
-  let contactedInquiries = 0;
-  let completedInquiries = 0;
-  let totalServices = 0;
-  let totalTestimonials = 0;
-  let totalBlogPosts = 0;
-  let inquiriesByService: { service: string; _count: { id: number } }[] = [];
-  let recentInquiries: { createdAt: Date }[] = [];
-
-  try {
-    [totalInquiries, totalServices, totalTestimonials, totalBlogPosts] = await Promise.all([
-      prisma.inquiry.count(),
-      prisma.service.count(),
-      prisma.testimonial.count(),
-      prisma.blogPost.count(),
-    ]);
-
-    [newInquiries, contactedInquiries, completedInquiries] = await Promise.all([
-      prisma.inquiry.count({ where: { status: "new" } }),
-      prisma.inquiry.count({ where: { status: "contacted" } }),
-      prisma.inquiry.count({ where: { status: "completed" } }),
-    ]);
-
-    inquiriesByService = await prisma.inquiry.groupBy({
+  const [
+    totalInquiries,
+    totalServices,
+    totalTestimonials,
+    totalBlogPosts,
+    newInquiries,
+    contactedInquiries,
+    completedInquiries,
+    inquiriesByService,
+    recentInquiries,
+  ] = await Promise.all([
+    prisma.inquiry.count().catch(() => 0),
+    prisma.service.count().catch(() => 0),
+    prisma.testimonial.count().catch(() => 0),
+    prisma.blogPost.count().catch(() => 0),
+    prisma.inquiry.count({ where: { status: "new" } }).catch(() => 0),
+    prisma.inquiry.count({ where: { status: "contacted" } }).catch(() => 0),
+    prisma.inquiry.count({ where: { status: "completed" } }).catch(() => 0),
+    prisma.inquiry.groupBy({
       by: ["service"],
       _count: { id: true },
       orderBy: { _count: { id: "desc" } },
-    });
-
-    recentInquiries = await prisma.inquiry.findMany({
+    }).catch(() => [] as { service: string; _count: { id: number } }[]),
+    prisma.inquiry.findMany({
       select: { createdAt: true },
       orderBy: { createdAt: "desc" },
       take: 100,
-    });
-  } catch {
-    // DB unavailable
-  }
+    }).catch(() => [] as { createdAt: Date }[]),
+  ]);
 
   // Last 7 days activity
   const now = new Date();
@@ -53,9 +44,11 @@ export default async function AdminStatsPage() {
   const dailyCounts = days.map((day) => {
     const count = recentInquiries.filter((inq) => {
       const d = new Date(inq.createdAt);
-      return d.getFullYear() === day.getFullYear() &&
+      return (
+        d.getFullYear() === day.getFullYear() &&
         d.getMonth() === day.getMonth() &&
-        d.getDate() === day.getDate();
+        d.getDate() === day.getDate()
+      );
     }).length;
     return { label: day.toLocaleDateString("en-GB", { weekday: "short" }), count };
   });
@@ -106,10 +99,8 @@ export default async function AdminStatsPage() {
           </div>
           <div className="space-y-3">
             {statusCards.map((s) => (
-              <div key={s.label} className="flex items-center justify-between gap-4">
-                <div className="flex items-center gap-2.5 min-w-[110px]">
-                  <span className={`inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-medium ${s.light}`}>{s.label}</span>
-                </div>
+              <div key={s.label} className="flex items-center gap-4">
+                <span className={`inline-flex w-24 shrink-0 justify-center rounded-full px-2.5 py-0.5 text-[11px] font-medium ${s.light}`}>{s.label}</span>
                 <div className="flex flex-1 items-center gap-3">
                   <div className="flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-white/[0.05]" style={{ height: 6 }}>
                     <div
@@ -164,10 +155,10 @@ export default async function AdminStatsPage() {
             {dailyCounts.map((day) => (
               <div key={day.label} className="flex flex-1 flex-col items-center gap-1.5">
                 <span className="text-[11px] font-medium text-slate-500">{day.count > 0 ? day.count : ""}</span>
-                <div className="w-full overflow-hidden rounded-t-md bg-slate-100 dark:bg-white/[0.05]" style={{ height: 88 }}>
+                <div className="relative w-full overflow-hidden rounded-t-md bg-slate-100 dark:bg-white/[0.05]" style={{ height: 88 }}>
                   <div
-                    className="w-full rounded-t-md bg-gradient-to-t from-blue-600 to-blue-400 transition-all duration-500"
-                    style={{ height: `${(day.count / maxCount) * 100}%`, marginTop: "auto" }}
+                    className="absolute bottom-0 w-full rounded-t-md bg-gradient-to-t from-blue-600 to-blue-400 transition-all duration-500"
+                    style={{ height: `${(day.count / maxCount) * 100}%` }}
                   />
                 </div>
                 <span className="text-[11px] text-slate-400">{day.label}</span>
