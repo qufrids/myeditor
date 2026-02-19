@@ -6,8 +6,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
+import Image from "next/image";
 import {
-  Menu, X, Sun, Moon, ChevronDown, Crown,
+  Menu, X, Sun, Moon, ChevronDown,
   FileText, PenTool, BookOpen, GraduationCap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -92,13 +93,15 @@ export function Navbar() {
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between sm:h-[72px]">
             {/* Logo */}
-            <Link href="/" className="group flex items-center gap-2.5 shrink-0">
-              <div className="relative">
-                <Crown className="h-5 w-5 text-amber-500 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-6deg]" />
-              </div>
-              <span className="text-[17px] font-bold tracking-[-0.02em] text-slate-900 dark:text-white">
-                cambridgewriters
-              </span>
+            <Link href="/" className="group flex items-center shrink-0">
+              <Image
+                src="/images/hero/cambridgewriters_logo.png"
+                alt="cambridgewriters"
+                width={180}
+                height={40}
+                className="h-9 w-auto object-contain"
+                priority
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -214,9 +217,14 @@ export function Navbar() {
 
                 {/* Drawer Header */}
                 <div className="flex h-16 items-center justify-between px-5 border-b border-slate-100 dark:border-white/[0.06]">
-                  <Link href="/" className="flex items-center gap-2" onClick={closeMobileMenu}>
-                    <Crown className="h-5 w-5 text-amber-500" />
-                    <span className="text-[15px] font-bold text-slate-900 dark:text-white">cambridgewriters</span>
+                  <Link href="/" className="flex items-center" onClick={closeMobileMenu}>
+                    <Image
+                      src="/images/hero/cambridgewriters_logo.png"
+                      alt="cambridgewriters"
+                      width={160}
+                      height={36}
+                      className="h-8 w-auto object-contain"
+                    />
                   </Link>
                   <button onClick={closeMobileMenu}
                     className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 dark:hover:bg-white/[0.06]">

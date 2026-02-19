@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Mail, Phone, MapPin, Crown } from "lucide-react";
+import Image from "next/image";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 const quickLinks = [
   { name: "Home", href: "/" },
@@ -32,9 +33,14 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:gap-10 lg:grid-cols-4 lg:gap-8">
           {/* Column 1: Brand */}
           <div className="col-span-2 lg:col-span-1">
-            <Link href="/" className="group inline-flex items-center gap-2">
-              <Crown className="h-5 w-5 text-amber-500 transition-transform duration-300 group-hover:rotate-[-6deg]" />
-              <span className="text-[15px] font-bold tracking-[-0.01em] text-slate-900 dark:text-white">cambridgewriters</span>
+            <Link href="/" className="inline-flex items-center">
+              <Image
+                src="/images/hero/cambridgewriters_logo.png"
+                alt="cambridgewriters"
+                width={160}
+                height={36}
+                className="h-8 w-auto object-contain"
+              />
             </Link>
             <p className="mt-4 max-w-[260px] text-[13px] leading-[1.7] text-slate-500 dark:text-slate-500">
               Connecting students with world-class academic writers. Bespoke work tailored to UK university standards.
