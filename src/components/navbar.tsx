@@ -97,7 +97,7 @@ export function Navbar() {
                 <Crown className="h-5 w-5 text-amber-500 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-6deg]" />
               </div>
               <span className="text-[17px] font-bold tracking-[-0.02em] text-slate-900 dark:text-white">
-                EditorsForUK
+                cambridgewriters
               </span>
             </Link>
 
@@ -216,7 +216,7 @@ export function Navbar() {
                 <div className="flex h-16 items-center justify-between px-5 border-b border-slate-100 dark:border-white/[0.06]">
                   <Link href="/" className="flex items-center gap-2" onClick={closeMobileMenu}>
                     <Crown className="h-5 w-5 text-amber-500" />
-                    <span className="text-[15px] font-bold text-slate-900 dark:text-white">EditorsForUK</span>
+                    <span className="text-[15px] font-bold text-slate-900 dark:text-white">cambridgewriters</span>
                   </Link>
                   <button onClick={closeMobileMenu}
                     className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 dark:hover:bg-white/[0.06]">

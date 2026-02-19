@@ -9,12 +9,12 @@ const GROUPS = [
 ] as const;
 
 const DEFAULT_SETTINGS = [
-  { key: "site_name", value: "EditorsForUK", type: "text", group: "general" },
+  { key: "site_name", value: "cambridgewriters", type: "text", group: "general" },
   { key: "site_tagline", value: "Expert Academic Writing Services", type: "text", group: "general" },
-  { key: "contact_email", value: "hello@editorsforuk.com", type: "text", group: "contact" },
+  { key: "contact_email", value: "info@cambridgewriters.co.uk", type: "text", group: "contact" },
   { key: "contact_phone", value: "+44 123 456 789", type: "text", group: "contact" },
   { key: "contact_address", value: "London, United Kingdom", type: "text", group: "contact" },
-  { key: "meta_title", value: "EditorsForUK — Expert Academic Writing Services", type: "text", group: "seo" },
+  { key: "meta_title", value: "cambridgewriters — Expert Academic Writing Services", type: "text", group: "seo" },
   { key: "meta_description", value: "Professional academic writing, editing and dissertation services for UK students.", type: "text", group: "seo" },
 ];
 

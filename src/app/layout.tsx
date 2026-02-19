@@ -13,8 +13,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "EditorsForUK | Premium Academic Writing Services",
-    template: "%s | EditorsForUK",
+    default: "cambridgewriters | Premium Academic Writing Services",
+    template: "%s | cambridgewriters",
   },
   description:
     "Premium academic writing services trusted by students across UK universities. Expert writers, guaranteed quality, delivered on time.",

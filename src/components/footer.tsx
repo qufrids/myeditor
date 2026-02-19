@@ -34,7 +34,7 @@ export function Footer() {
           <div className="col-span-2 lg:col-span-1">
             <Link href="/" className="group inline-flex items-center gap-2">
               <Crown className="h-5 w-5 text-amber-500 transition-transform duration-300 group-hover:rotate-[-6deg]" />
-              <span className="text-[15px] font-bold tracking-[-0.01em] text-slate-900 dark:text-white">EditorsForUK</span>
+              <span className="text-[15px] font-bold tracking-[-0.01em] text-slate-900 dark:text-white">cambridgewriters</span>
             </Link>
             <p className="mt-4 max-w-[260px] text-[13px] leading-[1.7] text-slate-500 dark:text-slate-500">
               Connecting students with world-class academic writers. Bespoke work tailored to UK university standards.
@@ -42,8 +42,8 @@ export function Footer() {
 
             {/* Contact */}
             <div className="mt-6 flex flex-col gap-2.5">
-              <a href="mailto:hello@editorsforuk.com" className="flex items-center gap-2.5 text-[13px] text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-500 dark:hover:text-white">
-                <Mail className="h-3.5 w-3.5 text-slate-400 dark:text-slate-600" /> hello@editorsforuk.com
+              <a href="mailto:info@cambridgewriters.co.uk" className="flex items-center gap-2.5 text-[13px] text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-500 dark:hover:text-white">
+                <Mail className="h-3.5 w-3.5 text-slate-400 dark:text-slate-600" /> info@cambridgewriters.co.uk
               </a>
               <a href="tel:+44123456789" className="flex items-center gap-2.5 text-[13px] text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-500 dark:hover:text-white">
                 <Phone className="h-3.5 w-3.5 text-slate-400 dark:text-slate-600" /> +44 123 456 789
@@ -102,7 +102,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 border-t border-slate-200 pt-6 dark:border-white/[0.04] sm:mt-14">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="text-[12px] text-slate-400 dark:text-slate-600">&copy; {new Date().getFullYear()} EditorsForUK. All rights reserved.</p>
+            <p className="text-[12px] text-slate-400 dark:text-slate-600">&copy; {new Date().getFullYear()} cambridgewriters. All rights reserved.</p>
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
               {legalLinks.map((link) => (
                 <Link key={link.name} href={link.href} className="text-[12px] text-slate-400 transition-colors hover:text-slate-700 dark:text-slate-600 dark:hover:text-slate-400">

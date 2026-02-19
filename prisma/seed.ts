@@ -9,10 +9,10 @@ async function main() {
   // Create admin user
   const hashedPassword = await bcrypt.hash("Admin@123456", 12);
   await prisma.user.upsert({
-    where: { email: "admin@editorsforuk.com" },
+    where: { email: "info@cambridgewriters.co.uk" },
     update: {},
     create: {
-      email: "admin@editorsforuk.com",
+      email: "info@cambridgewriters.co.uk",
       name: "Admin",
       password: hashedPassword,
       role: "admin",
@@ -52,7 +52,7 @@ async function main() {
         { step: 3, title: "Research & Writing", description: "Your writer crafts a thorough, well-researched piece" },
         { step: 4, title: "Quality Check & Delivery", description: "Final review, plagiarism check, and on-time delivery" },
       ],
-      metaTitle: "Assignment Writing Service UK | Expert Academic Help | EditorsForUK",
+      metaTitle: "Assignment Writing Service UK | Expert Academic Help | cambridgewriters",
       metaDesc: "Get premium assignment writing help from UK-based experts. Custom-written, plagiarism-free assignments delivered on time. Order now!",
       sortOrder: 1,
     },
@@ -86,7 +86,7 @@ async function main() {
         { step: 3, title: "Drafting & Review", description: "Carefully crafted with rigorous academic standards" },
         { step: 4, title: "Final Delivery", description: "Polished essay delivered with plagiarism report" },
       ],
-      metaTitle: "Essay Writing Service UK | Professional Essay Help | EditorsForUK",
+      metaTitle: "Essay Writing Service UK | Professional Essay Help | cambridgewriters",
       metaDesc: "Premium essay writing service by UK academic experts. Well-argued, properly cited essays delivered on time. Get started today!",
       sortOrder: 2,
     },
@@ -120,7 +120,7 @@ async function main() {
         { step: 3, title: "In-Depth Development", description: "Thorough research and structured writing" },
         { step: 4, title: "Review & Submit", description: "Quality assured and delivered for your review" },
       ],
-      metaTitle: "Coursework Writing Service UK | Expert Coursework Help | EditorsForUK",
+      metaTitle: "Coursework Writing Service UK | Expert Coursework Help | cambridgewriters",
       metaDesc: "Get professional coursework writing help from UK experts. Comprehensive, well-researched coursework delivered on time. Order now!",
       sortOrder: 3,
     },
@@ -154,7 +154,7 @@ async function main() {
         { step: 3, title: "Chapter Development", description: "Systematic writing with regular progress updates" },
         { step: 4, title: "Review & Refinement", description: "Thorough review, editing, and final polish" },
       ],
-      metaTitle: "Dissertation Writing Service UK | PhD Expert Help | EditorsForUK",
+      metaTitle: "Dissertation Writing Service UK | PhD Expert Help | cambridgewriters",
       metaDesc: "Premium dissertation writing service by PhD-qualified experts. Full chapter support, original research, confidential service. Start today!",
       sortOrder: 4,
     },
@@ -330,8 +330,8 @@ async function main() {
       category: "Academic Writing",
       tags: ["essay writing", "study tips", "academic skills"],
       isPublished: true,
-      metaTitle: "How to Write a First-Class Essay | EditorsForUK Blog",
-      metaDesc: "Learn proven strategies for writing first-class essays. Expert tips on research, structure, and critical analysis from EditorsForUK.",
+      metaTitle: "How to Write a First-Class Essay | cambridgewriters Blog",
+      metaDesc: "Learn proven strategies for writing first-class essays. Expert tips on research, structure, and critical analysis from cambridgewriters.",
     },
     {
       title: "Top 10 Dissertation Mistakes to Avoid",
@@ -341,7 +341,7 @@ async function main() {
       category: "Research",
       tags: ["dissertation", "research tips", "common mistakes"],
       isPublished: true,
-      metaTitle: "Top 10 Dissertation Mistakes to Avoid | EditorsForUK Blog",
+      metaTitle: "Top 10 Dissertation Mistakes to Avoid | cambridgewriters Blog",
       metaDesc: "Avoid common dissertation pitfalls. Expert advice on planning, writing, and completing your dissertation successfully.",
     },
     {
@@ -352,7 +352,7 @@ async function main() {
       category: "Study Tips",
       tags: ["referencing", "harvard", "citations", "academic writing"],
       isPublished: true,
-      metaTitle: "Harvard Referencing Guide | EditorsForUK Blog",
+      metaTitle: "Harvard Referencing Guide | cambridgewriters Blog",
       metaDesc: "Complete guide to Harvard referencing. Learn in-text citations, reference lists, and formatting rules for UK universities.",
     },
   ];
@@ -368,9 +368,9 @@ async function main() {
 
   // Create site settings
   const settings = [
-    { key: "site_name", value: "EditorsForUK", type: "text", group: "general" },
+    { key: "site_name", value: "cambridgewriters", type: "text", group: "general" },
     { key: "site_tagline", value: "Premium Academic Writing Services", type: "text", group: "general" },
-    { key: "contact_email", value: "info@editorsforuk.com", type: "text", group: "contact" },
+    { key: "contact_email", value: "info@cambridgewriters.co.uk", type: "text", group: "contact" },
     { key: "contact_phone", value: "+44 20 1234 5678", type: "text", group: "contact" },
     { key: "hero_title", value: "Excellence in Academic Writing", type: "text", group: "homepage" },
     { key: "hero_subtitle", value: "Premium academic support trusted by students across UK universities. Expert writers, guaranteed quality, delivered on time.", type: "text", group: "homepage" },
@@ -390,16 +390,16 @@ async function main() {
     {
       title: "Privacy Policy",
       slug: "privacy-policy",
-      content: `<h2>Privacy Policy</h2><p>Last updated: February 2026</p><h3>1. Introduction</h3><p>EditorsForUK ("we", "our", "us") is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you use our services.</p><h3>2. Information We Collect</h3><p>We collect information you provide directly, including your name, email address, phone number, academic details, and order requirements. We also collect technical data such as your IP address, browser type, and usage patterns.</p><h3>3. How We Use Your Information</h3><p>We use your information to: provide and improve our services, process your orders, communicate with you, ensure quality control, and comply with legal obligations.</p><h3>4. Data Protection</h3><p>We implement industry-standard security measures to protect your personal data. All communications are encrypted, and access to personal information is restricted to authorised personnel only.</p><h3>5. Your Rights</h3><p>You have the right to access, correct, delete, or restrict the processing of your personal data. You can exercise these rights by contacting us at privacy@editorsforuk.com.</p><h3>6. Cookies</h3><p>We use cookies to improve your browsing experience. You can manage cookie preferences through your browser settings.</p><h3>7. Contact Us</h3><p>For privacy-related inquiries, please contact us at privacy@editorsforuk.com.</p>`,
-      metaTitle: "Privacy Policy | EditorsForUK",
-      metaDesc: "Read our privacy policy to understand how EditorsForUK protects your personal information.",
+      content: `<h2>Privacy Policy</h2><p>Last updated: February 2026</p><h3>1. Introduction</h3><p>cambridgewriters ("we", "our", "us") is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you use our services.</p><h3>2. Information We Collect</h3><p>We collect information you provide directly, including your name, email address, phone number, academic details, and order requirements. We also collect technical data such as your IP address, browser type, and usage patterns.</p><h3>3. How We Use Your Information</h3><p>We use your information to: provide and improve our services, process your orders, communicate with you, ensure quality control, and comply with legal obligations.</p><h3>4. Data Protection</h3><p>We implement industry-standard security measures to protect your personal data. All communications are encrypted, and access to personal information is restricted to authorised personnel only.</p><h3>5. Your Rights</h3><p>You have the right to access, correct, delete, or restrict the processing of your personal data. You can exercise these rights by contacting us at info@cambridgewriters.co.uk.</p><h3>6. Cookies</h3><p>We use cookies to improve your browsing experience. You can manage cookie preferences through your browser settings.</p><h3>7. Contact Us</h3><p>For privacy-related inquiries, please contact us at info@cambridgewriters.co.uk.</p>`,
+      metaTitle: "Privacy Policy | cambridgewriters",
+      metaDesc: "Read our privacy policy to understand how cambridgewriters protects your personal information.",
     },
     {
       title: "Terms of Service",
       slug: "terms-of-service",
-      content: `<h2>Terms of Service</h2><p>Last updated: February 2026</p><h3>1. Acceptance of Terms</h3><p>By accessing and using EditorsForUK services, you agree to be bound by these Terms of Service. If you do not agree, please do not use our services.</p><h3>2. Services Description</h3><p>EditorsForUK provides academic writing, editing, and consulting services. Our work is intended as reference material and study aids to support your own academic development.</p><h3>3. User Responsibilities</h3><p>You are responsible for providing accurate information, using our services ethically, and complying with your institution's academic integrity policies.</p><h3>4. Intellectual Property</h3><p>Upon full payment, copyright of the delivered work transfers to you. However, we retain the right to use anonymised samples for quality assurance purposes.</p><h3>5. Payment Terms</h3><p>Payment is required as specified at the time of order. Prices are quoted in GBP and include all applicable taxes.</p><h3>6. Revision Policy</h3><p>We offer unlimited free revisions within 14 days of delivery, provided the revision requests are within the scope of the original requirements.</p><h3>7. Refund Policy</h3><p>Refunds are available in accordance with our refund policy. Full refunds are issued if we fail to deliver by the agreed deadline or if the work substantially deviates from the requirements.</p><h3>8. Limitation of Liability</h3><p>EditorsForUK's liability is limited to the amount paid for the specific service. We are not liable for any consequential damages arising from the use of our services.</p><h3>9. Changes to Terms</h3><p>We reserve the right to modify these terms at any time. Continued use of our services constitutes acceptance of any changes.</p><h3>10. Contact</h3><p>For questions about these terms, contact us at legal@editorsforuk.com.</p>`,
-      metaTitle: "Terms of Service | EditorsForUK",
-      metaDesc: "Read the terms of service for EditorsForUK academic writing services.",
+      content: `<h2>Terms of Service</h2><p>Last updated: February 2026</p><h3>1. Acceptance of Terms</h3><p>By accessing and using cambridgewriters services, you agree to be bound by these Terms of Service. If you do not agree, please do not use our services.</p><h3>2. Services Description</h3><p>cambridgewriters provides academic writing, editing, and consulting services. Our work is intended as reference material and study aids to support your own academic development.</p><h3>3. User Responsibilities</h3><p>You are responsible for providing accurate information, using our services ethically, and complying with your institution's academic integrity policies.</p><h3>4. Intellectual Property</h3><p>Upon full payment, copyright of the delivered work transfers to you. However, we retain the right to use anonymised samples for quality assurance purposes.</p><h3>5. Payment Terms</h3><p>Payment is required as specified at the time of order. Prices are quoted in GBP and include all applicable taxes.</p><h3>6. Revision Policy</h3><p>We offer unlimited free revisions within 14 days of delivery, provided the revision requests are within the scope of the original requirements.</p><h3>7. Refund Policy</h3><p>Refunds are available in accordance with our refund policy. Full refunds are issued if we fail to deliver by the agreed deadline or if the work substantially deviates from the requirements.</p><h3>8. Limitation of Liability</h3><p>cambridgewriters's liability is limited to the amount paid for the specific service. We are not liable for any consequential damages arising from the use of our services.</p><h3>9. Changes to Terms</h3><p>We reserve the right to modify these terms at any time. Continued use of our services constitutes acceptance of any changes.</p><h3>10. Contact</h3><p>For questions about these terms, contact us at info@cambridgewriters.co.uk.</p>`,
+      metaTitle: "Terms of Service | cambridgewriters",
+      metaDesc: "Read the terms of service for cambridgewriters academic writing services.",
     },
   ];
 

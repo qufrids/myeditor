@@ -20,7 +20,7 @@ export default function AboutPage() {
         <div className="pointer-events-none absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_70%_70%,rgba(139,92,246,0.1),transparent_50%)]" />
         <div className="relative z-10 mx-auto max-w-3xl px-5 text-center sm:px-6 lg:px-8">
           <h1 className="text-[clamp(2rem,5vw,3.25rem)] font-bold tracking-[-0.03em] text-white leading-[1.1]">
-            About EditorsForUK
+            About cambridgewriters
           </h1>
           <p className="mt-5 text-[clamp(0.95rem,2vw,1.1rem)] leading-[1.7] text-slate-400 max-w-xl mx-auto">
             We are a team of passionate academics and writers dedicated to helping UK students achieve academic excellence. Founded with the mission of providing premium, bespoke academic writing services.
@@ -53,7 +53,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-3xl px-5 text-center sm:px-6 lg:px-8">
           <h2 className="text-[clamp(1.5rem,4vw,2.25rem)] font-bold tracking-[-0.03em] text-slate-900 dark:text-white">Our Story</h2>
           <div className="mt-8 space-y-5 text-[clamp(0.95rem,2vw,1.05rem)] leading-[1.8] text-slate-600 dark:text-slate-300">
-            <p>EditorsForUK was founded by a group of UK university graduates who understood the challenges students face. Having navigated the demanding UK academic system ourselves, we know what it takes to produce work that meets the highest standards.</p>
+            <p>cambridgewriters was founded by a group of UK university graduates who understood the challenges students face. Having navigated the demanding UK academic system ourselves, we know what it takes to produce work that meets the highest standards.</p>
             <p>Today, we have helped over 15,000 students across more than 100 UK universities achieve their academic goals. Our team of 200+ expert writers covers every discipline, from business and law to STEM and humanities.</p>
             <p>We believe every student deserves access to premium academic support, and we are committed to making that a reality.</p>
           </div>
