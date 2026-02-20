@@ -26,6 +26,38 @@ function row(label: string, value: string | null | undefined) {
     </tr>`;
 }
 
+function buildInquiryText(data: InquiryData): string {
+  const capitalize = (s?: string | null) =>
+    s ? s.charAt(0).toUpperCase() + s.slice(1) : "—";
+  const date = new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+
+  return [
+    "CAMBRIDGE WRITERS — NEW INQUIRY",
+    date,
+    "",
+    "CUSTOMER",
+    `Name:   ${data.name}`,
+    `Email:  ${data.email}`,
+    data.phone ? `Phone:  ${data.phone}` : null,
+    "",
+    "ORDER DETAILS",
+    `Service:        ${capitalize(data.service)}`,
+    data.academicLevel ? `Academic Level: ${capitalize(data.academicLevel)}` : null,
+    data.deadline     ? `Deadline:       ${data.deadline}` : null,
+    data.wordCount    ? `Word Count:     ${data.wordCount.toLocaleString()} words` : null,
+    "",
+    data.instructions ? "INSTRUCTIONS\n" + data.instructions : null,
+    "",
+    `View in admin: ${ADMIN_URL}`,
+    "",
+    "---",
+    "Automated notification from cambridgewriters.co.uk",
+    "Reply to this email to contact the customer directly.",
+  ]
+    .filter((line) => line !== null)
+    .join("\n");
+}
+
 function buildInquiryHtml(data: InquiryData): string {
   const capitalize = (s?: string | null) =>
     s ? s.charAt(0).toUpperCase() + s.slice(1) : "—";
@@ -112,12 +144,17 @@ export async function sendInquiryNotification(data: InquiryData): Promise<void> 
   }
 
   try {
+    const service = data.service
+      ? data.service.charAt(0).toUpperCase() + data.service.slice(1)
+      : "General";
+
     const { error } = await resend.emails.send({
       from: FROM,
       to: NOTIFY_TO,
       replyTo: data.email,
-      subject: `New Inquiry: ${data.name} — ${data.service ? data.service.charAt(0).toUpperCase() + data.service.slice(1) : "General"}`,
+      subject: `Inquiry from ${data.name} – ${service}`,
       html: buildInquiryHtml(data),
+      text: buildInquiryText(data),
     });
 
     if (error) {
