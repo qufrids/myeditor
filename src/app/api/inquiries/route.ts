@@ -23,9 +23,18 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Fire both emails non-blocking — never fails the request
-    void sendInquiryNotification(inquiry);
-    void sendOrderConfirmation(inquiry);
+    // Send both emails and log results clearly
+    const [adminResult, confirmResult] = await Promise.allSettled([
+      sendInquiryNotification(inquiry),
+      sendOrderConfirmation(inquiry),
+    ]);
+
+    if (adminResult.status === "rejected") {
+      console.error("[inquiries] Admin email failed:", adminResult.reason);
+    }
+    if (confirmResult.status === "rejected") {
+      console.error("[inquiries] Confirmation email failed:", confirmResult.reason);
+    }
 
     return NextResponse.json(inquiry, { status: 201 });
   } catch (err) {
