@@ -1,6 +1,6 @@
 ﻿import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { sendInquiryNotification } from "@/lib/email";
+import { sendInquiryNotification, sendOrderConfirmation } from "@/lib/email";
 
 export async function GET() {
   const inquiries = await prisma.inquiry.findMany({ orderBy: { createdAt: "desc" } });
@@ -23,8 +23,9 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Fire notification email — non-blocking, never fails the request
+    // Fire both emails non-blocking — never fails the request
     void sendInquiryNotification(inquiry);
+    void sendOrderConfirmation(inquiry);
 
     return NextResponse.json(inquiry, { status: 201 });
   } catch (err) {
