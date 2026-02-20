@@ -2,11 +2,9 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const NOTIFY_TO = "info@cambridgewriters.co.uk";
-const FROM = process.env.EMAIL_FROM ?? "Cambridge Writers <notifications@cambridgewriters.co.uk>";
-const ADMIN_URL = process.env.NEXTAUTH_URL
-  ? `${process.env.NEXTAUTH_URL}/admin/inquiries`
-  : "https://cambridgewriters.co.uk/admin/inquiries";
+const NOTIFY_TO = process.env.NOTIFICATION_EMAIL ?? "info@cambridgewriters.co.uk";
+const FROM = process.env.EMAIL_FROM ?? "Cambridge Writers <onboarding@resend.dev>";
+const ADMIN_URL = "https://cambridgewriters.co.uk/admin/inquiries";
 
 interface InquiryData {
   name: string;
