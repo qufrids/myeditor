@@ -34,7 +34,9 @@ export function AdminSidebar({ user, mobileOpen = false, onMobileClose }: AdminS
 
   const handleSignOut = async () => {
     const { signOut } = await import("next-auth/react");
-    signOut({ callbackUrl: "/admin/login" });
+    // Use window.location.origin so the redirect always goes to the actual
+    // domain (production or local) rather than relying on NEXTAUTH_URL.
+    signOut({ callbackUrl: `${window.location.origin}/admin/login` });
   };
 
   return (
