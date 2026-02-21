@@ -12,7 +12,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       attribute="class"
       defaultTheme="light"
       enableSystem={false}
-      storageKey="editorsforuk-theme"
+      storageKey="cambridgewriters-theme"
     >
       {children}
     </NextThemesProvider>

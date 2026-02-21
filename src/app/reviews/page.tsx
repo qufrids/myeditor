@@ -15,7 +15,7 @@ export default async function ReviewsPage() {
             Student Reviews
           </h1>
           <p className="mt-4 text-[clamp(0.95rem,2vw,1.1rem)] text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            See what our students have to say about their experience with EditorsForUK
+            See what our students have to say about their experience with Cambridge Writers
           </p>
         </div>
 

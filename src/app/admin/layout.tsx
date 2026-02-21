@@ -2,7 +2,7 @@
 // Auth + sidebar live in src/app/admin/(protected)/layout.tsx.
 // The login page at /admin/login uses this layout directly (no auth check).
 export const metadata = {
-  title: "Admin | EditorsForUK",
+  title: "Admin | Cambridge Writers",
 };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

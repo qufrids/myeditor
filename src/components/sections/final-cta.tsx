@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export function FinalCTA() {
   return (
@@ -20,17 +19,28 @@ export function FinalCTA() {
             Ready to Elevate Your Grades?
           </h2>
           <p className="mt-4 text-[clamp(0.95rem,2vw,1.1rem)] leading-relaxed text-blue-100/80 max-w-xl mx-auto">
-            Join 15,000+ students who trust EditorsForUK for premium academic writing. Get started today.
+            Join 15,000+ students who trust Cambridge Writers for premium academic writing. Get started today.
           </p>
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 shadow-[0_4px_20px_rgba(0,0,0,0.15)] rounded-full" asChild>
-              <Link href="/order" className="gap-2">
-                Place Your Order <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 dark:border-white/20 dark:text-white dark:hover:bg-white/10 rounded-full" asChild>
-              <Link href="/contact">Talk to an Expert</Link>
-            </Button>
+
+          <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
+            {/* Primary — white pill with hover lift, matches site's premium style */}
+            <Link
+              href="/order"
+              className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-white px-8 py-[14px] text-[15px] font-bold tracking-tight text-blue-600 shadow-[0_4px_24px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-[2px] hover:bg-blue-50 hover:shadow-[0_8px_36px_rgba(0,0,0,0.24)] active:scale-[0.98] active:translate-y-0 sm:px-9 sm:text-[15.5px]"
+            >
+              {/* Subtle gloss */}
+              <span className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-full bg-gradient-to-b from-white/40 to-transparent" />
+              <span className="relative">Place Your Order</span>
+              <ArrowRight className="relative h-[17px] w-[17px] transition-transform duration-200 group-hover:translate-x-1" />
+            </Link>
+
+            {/* Secondary — ghost white outline */}
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/[0.08] px-8 py-[14px] text-[15px] font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-[1px] hover:border-white/50 hover:bg-white/[0.15] active:scale-[0.98] sm:px-9"
+            >
+              Talk to an Expert
+            </Link>
           </div>
         </motion.div>
       </div>

@@ -44,7 +44,7 @@ export default function AdminLoginPage() {
               <Crown className="h-6 w-6 text-white" />
             </div>
             <h1 className="text-[20px] font-bold tracking-[-0.02em] text-white">Admin Login</h1>
-            <p className="mt-1.5 text-[13px] text-slate-500">Sign in to manage EditorsForUK</p>
+            <p className="mt-1.5 text-[13px] text-slate-500">Sign in to manage Cambridge Writers</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -61,7 +61,7 @@ export default function AdminLoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 className={inputClass}
-                placeholder="admin@editorsforuk.com"
+                placeholder="admin@cambridgewriters.co.uk"
               />
             </div>
             <div>

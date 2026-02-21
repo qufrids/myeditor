@@ -20,7 +20,7 @@ export function WhyChooseUs() {
           viewport={{ once: true }} transition={{ duration: 0.5 }}
           className="text-center mb-12 sm:mb-16">
           <h2 className="text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-[-0.03em] text-slate-900 dark:text-white">
-            Why Choose EditorsForUK?
+            Why Choose Cambridge Writers?
           </h2>
           <p className="mt-3 text-base text-slate-500 dark:text-slate-400 max-w-lg mx-auto sm:text-[17px]">
             We set the standard for premium academic writing in the UK
