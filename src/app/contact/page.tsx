@@ -40,7 +40,7 @@ export default function ContactPage() {
             <div className="mt-8 space-y-5">
               {[
                 { icon: Mail, label: "Email", value: "info@cambridgewriters.co.uk", href: "mailto:info@cambridgewriters.co.uk" },
-                { icon: Phone, label: "Phone", value: "+44 123 456 789", href: "tel:+44123456789" },
+                { icon: Phone, label: "Phone", value: "+44 7877 186551", href: "tel:+447877186551" },
                 { icon: MapPin, label: "Location", value: "London, United Kingdom" },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-4">

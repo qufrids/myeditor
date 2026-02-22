@@ -52,8 +52,8 @@ export function Footer() {
               <a href="mailto:info@cambridgewriters.co.uk" className="flex items-center gap-2.5 text-[13px] text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-500 dark:hover:text-white">
                 <Mail className="h-3.5 w-3.5 text-slate-400 dark:text-slate-600" /> info@cambridgewriters.co.uk
               </a>
-              <a href="tel:+44123456789" className="flex items-center gap-2.5 text-[13px] text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-500 dark:hover:text-white">
-                <Phone className="h-3.5 w-3.5 text-slate-400 dark:text-slate-600" /> +44 123 456 789
+              <a href="tel:+447877186551" className="flex items-center gap-2.5 text-[13px] text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-500 dark:hover:text-white">
+                <Phone className="h-3.5 w-3.5 text-slate-400 dark:text-slate-600" /> +44 7877 186551
               </a>
               <div className="flex items-center gap-2.5 text-[13px] text-slate-500 dark:text-slate-500">
                 <MapPin className="h-3.5 w-3.5 text-slate-400 dark:text-slate-600" /> London, United Kingdom

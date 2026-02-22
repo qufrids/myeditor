@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
-const WA_NUMBER = "447428822494";
+const WA_NUMBER = "447877186551";
 const WA_MESSAGE = "Hi! I'd like to get a quote for academic writing help.";
 const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MESSAGE)}`;
 
