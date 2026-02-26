@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { LayoutWrapper } from '@/components/layout-wrapper';
@@ -63,10 +64,38 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning className='scroll-smooth'>
       <body className={`${inter.variable} font-sans antialiased bg-background text-foreground`}>
+        {/* Meta Pixel — noscript fallback */}
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=2243796809155200&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
+
         <ThemeProvider>
           <LayoutWrapper>{children}</LayoutWrapper>
           <WhatsAppButton />
         </ThemeProvider>
+
+        {/* Meta Pixel — loads after page is interactive */}
+        <Script id="meta-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init','2243796809155200');
+            fbq('track','PageView');
+          `}
+        </Script>
       </body>
     </html>
   );
