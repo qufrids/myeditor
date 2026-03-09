@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Loader2, ChevronLeft } from "lucide-react";
+import { RichTextEditor } from "@/components/admin/rich-text-editor";
 
 const inputCls = "w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-[13px] text-slate-900 placeholder:text-slate-400 transition-colors focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/10 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-white dark:placeholder:text-slate-500 dark:focus:bg-white/[0.06]";
 const labelCls = "mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.06em] text-slate-400";
@@ -12,13 +13,8 @@ function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: 
   return (
     <div className="flex cursor-pointer items-center justify-between py-0.5">
       <span className="text-[13px] font-medium text-slate-700 dark:text-slate-300">{label}</span>
-      <button
-        type="button"
-        role="switch"
-        aria-checked={checked}
-        onClick={() => onChange(!checked)}
-        className={`relative h-5 w-9 rounded-full transition-colors ${checked ? "bg-blue-500" : "bg-slate-200 dark:bg-white/10"}`}
-      >
+      <button type="button" role="switch" aria-checked={checked} onClick={() => onChange(!checked)}
+        className={`relative h-5 w-9 rounded-full transition-colors ${checked ? "bg-blue-500" : "bg-slate-200 dark:bg-white/10"}`}>
         <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${checked ? "translate-x-[18px]" : "translate-x-0.5"}`} />
       </button>
     </div>
@@ -46,6 +42,7 @@ export default function NewBlogPostPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!form.content || form.content === "<p></p>") return alert("Please add some content.");
     setLoading(true);
     await fetch("/api/blog", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) });
     router.push("/admin/blog");
@@ -53,14 +50,13 @@ export default function NewBlogPostPage() {
   };
 
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="mx-auto max-w-3xl">
       <div className="mb-6 flex items-center gap-3">
         <Link href="/admin/blog" className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-white/[0.06]">
           <ChevronLeft className="h-4 w-4" />
         </Link>
         <h1 className="text-[22px] font-bold tracking-[-0.02em] text-slate-900 dark:text-white">New Blog Post</h1>
       </div>
-
       <form onSubmit={handleSubmit} className="space-y-4">
         <FormCard title="Basic Info">
           <div>
@@ -76,14 +72,16 @@ export default function NewBlogPostPage() {
             <textarea rows={2} value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} className={inputCls} placeholder="Short summary shown in blog listing..." />
           </div>
         </FormCard>
-
         <FormCard title="Content">
           <div>
             <label className={labelCls}>Body *</label>
-            <textarea required rows={14} value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} className={inputCls} placeholder="Write the full post content here..." />
+            <RichTextEditor
+              value={form.content}
+              onChange={(html) => setForm({ ...form, content: html })}
+              placeholder="Start writing your post… use the toolbar for headings, bold, lists, links and more."
+            />
           </div>
         </FormCard>
-
         <FormCard title="Media & SEO">
           <div>
             <label className={labelCls}>Cover Image URL</label>
@@ -98,11 +96,9 @@ export default function NewBlogPostPage() {
             <input type="text" value={form.metaDesc} onChange={(e) => setForm({ ...form, metaDesc: e.target.value })} className={inputCls} placeholder="Search result snippet (150–160 chars)" />
           </div>
         </FormCard>
-
         <FormCard title="Publishing">
           <Toggle checked={form.isPublished} onChange={(v) => setForm({ ...form, isPublished: v })} label="Published (visible on site)" />
         </FormCard>
-
         <div className="flex gap-3 pt-2">
           <button type="submit" disabled={loading} className="inline-flex h-9 items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 px-5 text-[13px] font-semibold text-white shadow-md transition-all hover:-translate-y-px hover:shadow-lg disabled:opacity-60">
             {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : null}

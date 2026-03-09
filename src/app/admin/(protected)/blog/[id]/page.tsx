@@ -4,6 +4,7 @@ import { use, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Loader2, Trash2, ChevronLeft } from "lucide-react";
+import { RichTextEditor } from "@/components/admin/rich-text-editor";
 
 const inputCls = "w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-[13px] text-slate-900 placeholder:text-slate-400 transition-colors focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/10 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-white dark:placeholder:text-slate-500 dark:focus:bg-white/[0.06]";
 const labelCls = "mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.06em] text-slate-400";
@@ -12,13 +13,8 @@ function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: 
   return (
     <div className="flex cursor-pointer items-center justify-between py-0.5">
       <span className="text-[13px] font-medium text-slate-700 dark:text-slate-300">{label}</span>
-      <button
-        type="button"
-        role="switch"
-        aria-checked={checked}
-        onClick={() => onChange(!checked)}
-        className={`relative h-5 w-9 rounded-full transition-colors ${checked ? "bg-blue-500" : "bg-slate-200 dark:bg-white/10"}`}
-      >
+      <button type="button" role="switch" aria-checked={checked} onClick={() => onChange(!checked)}
+        className={`relative h-5 w-9 rounded-full transition-colors ${checked ? "bg-blue-500" : "bg-slate-200 dark:bg-white/10"}`}>
         <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${checked ? "translate-x-[18px]" : "translate-x-0.5"}`} />
       </button>
     </div>
@@ -95,7 +91,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
   }
 
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="mx-auto max-w-3xl">
       <div className="mb-6 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <Link href="/admin/blog" className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-white/[0.06]">
@@ -103,12 +99,8 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
           </Link>
           <h1 className="text-[22px] font-bold tracking-[-0.02em] text-slate-900 dark:text-white">Edit Blog Post</h1>
         </div>
-        <button
-          type="button"
-          onClick={handleDelete}
-          disabled={deleting}
-          className="flex items-center gap-1.5 rounded-xl px-3 py-2 text-[13px] font-medium text-red-500 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-500/[0.08] disabled:opacity-50"
-        >
+        <button type="button" onClick={handleDelete} disabled={deleting}
+          className="flex items-center gap-1.5 rounded-xl px-3 py-2 text-[13px] font-medium text-red-500 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-500/[0.08] disabled:opacity-50">
           {deleting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
           Delete
         </button>
@@ -133,7 +125,10 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
         <FormCard title="Content">
           <div>
             <label className={labelCls}>Body *</label>
-            <textarea required rows={14} value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} className={inputCls} />
+            <RichTextEditor
+              value={form.content}
+              onChange={(html) => setForm({ ...form, content: html })}
+            />
           </div>
         </FormCard>
 

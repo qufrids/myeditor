@@ -41,11 +41,23 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         )}
 
-        <div className="prose prose-slate dark:prose-invert mt-10 max-w-none prose-p:text-[15px] prose-p:leading-[1.8] prose-headings:tracking-[-0.02em]">
-          {post.content.split("\n").map((paragraph, i) => (
-            paragraph.trim() ? <p key={i}>{paragraph}</p> : null
-          ))}
-        </div>
+        {/* Render stored HTML with full Tailwind prose styling */}
+        <div
+          className="prose prose-slate dark:prose-invert mt-10 max-w-none
+            prose-headings:tracking-[-0.02em] prose-headings:font-bold
+            prose-h1:text-[clamp(1.5rem,3vw,2rem)]
+            prose-h2:text-[clamp(1.25rem,2.5vw,1.6rem)]
+            prose-h3:text-[1.15rem]
+            prose-p:text-[15px] prose-p:leading-[1.8] prose-p:text-slate-600 dark:prose-p:text-slate-300
+            prose-li:text-[15px] prose-li:text-slate-600 dark:prose-li:text-slate-300
+            prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline dark:prose-a:text-blue-400
+            prose-blockquote:border-l-blue-500 prose-blockquote:bg-blue-50/50 prose-blockquote:py-1 prose-blockquote:rounded-r-lg dark:prose-blockquote:bg-blue-500/5
+            prose-code:text-blue-700 prose-code:bg-blue-50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:text-[13px] dark:prose-code:bg-blue-500/10 dark:prose-code:text-blue-300
+            prose-pre:bg-slate-900 prose-pre:rounded-xl
+            prose-img:rounded-xl prose-img:shadow-md
+            prose-hr:border-slate-200 dark:prose-hr:border-white/10"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
       </article>
 
       <div className="h-20 sm:h-24" />
