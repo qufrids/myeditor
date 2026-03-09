@@ -6,7 +6,6 @@ import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
 import TextAlign from "@tiptap/extension-text-align";
-import TextStyle from "@tiptap/extension-text-style";
 import Placeholder from "@tiptap/extension-placeholder";
 import { useEffect, useCallback } from "react";
 import {
@@ -58,7 +57,6 @@ export function RichTextEditor({ value, onChange, placeholder = "Write your cont
         heading: { levels: [1, 2, 3] },
       }),
       Underline,
-      TextStyle,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       Link.configure({ openOnClick: false, HTMLAttributes: { class: "text-blue-600 underline" } }),
       Image.configure({ HTMLAttributes: { class: "max-w-full rounded-xl" } }),
@@ -78,7 +76,7 @@ export function RichTextEditor({ value, onChange, placeholder = "Write your cont
   // Sync external value changes (e.g. when editing an existing post)
   useEffect(() => {
     if (editor && value !== editor.getHTML()) {
-      editor.commands.setContent(value, false);
+      editor.commands.setContent(value);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
